@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', 'BackendController@home')->name('backend');
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
