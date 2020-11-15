@@ -107,7 +107,7 @@
           </a>
         </li>
         <li class="treeview">
-          <a class="app-menu__item {{Request::is('customer*') ? 'active' : ''}}" href="{{route('backend')}}">
+          <a class="app-menu__item {{Request::is('customer*') ? 'active' : ''}}" href="{{route('customer.index')}}">
             <i class="app-menu__icon fa fa-laptop"></i>
             <span class="app-menu__label">Customer</span>
           </a>
@@ -125,19 +125,19 @@
           </a>
         </li>
         <li class="treeview">
-          <a class="app-menu__item {{Request::is('order*') ? 'active' : ''}}" href="{{route('backend')}}">
+          <a class="app-menu__item {{Request::is('pair*') ? 'active' : ''}}" href="{{route('backend')}}">
             <i class="app-menu__icon fa fa-laptop"></i>
             <span class="app-menu__label">Pair</span>
           </a>
         </li>
         <li class="treeview">
-          <a class="app-menu__item {{Request::is('order*') ? 'active' : ''}}" href="{{route('backend')}}">
+          <a class="app-menu__item {{Request::is('way*') ? 'active' : ''}}" href="{{route('backend')}}">
             <i class="app-menu__icon fa fa-laptop"></i>
             <span class="app-menu__label">Way</span>
           </a>
         </li>
         <li class="treeview">
-          <a class="app-menu__item {{Request::is('order*') ? 'active' : ''}}" href="{{route('township.index')}}">
+          <a class="app-menu__item {{Request::is('township*') ? 'active' : ''}}" href="{{route('township.index')}}">
             <i class="app-menu__icon fa fa-laptop"></i>
             <span class="app-menu__label">Township</span>
           </a>

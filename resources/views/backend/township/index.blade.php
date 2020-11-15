@@ -15,37 +15,40 @@
       <div class="row ">
         <div class="col-md-12 col-lg-12 col-sm-12 col-12">
           <div class="tile">
-            <h2 class="d-inline-block mb-5">Deliver List</h2>
-              <a href="{{route('deliver.create')}}" class="btn btn-info float-right">Add New</a>
+            <h2 class="d-inline-block mb-5">Township List</h2>
+              <a href="{{route('township.create')}}" class="btn btn-info float-right">Add New</a>
           
             <table class="table py-5 table-bordered my-5" id="sampleTable">
               <thead >
                 <tr>
                   <th>No</th>
-                  <th>Name</th>
                   <th>Codeno</th>
+                  <th>Name</th>
                   <th>Price</th>
                   <th>Actions</th>
                 </tr>
               </thead>
               <tbody>
-              	
+                @php $i=1 @endphp
+
+                @foreach($township as $town)
+              	<tr>
+                  <td>{{$i++}}</td>
+                  <td>{{$town->codeno}}</td>
+                  <td>{{$town->name}}</td>
+                  <td>{{$town->price}}</td>
                 	<td>
-                  		<a href="" class="btn btn-success">Edit</a>
-                  		<a href="" class="btn btn-info">detail</a>
-                  		<form method="post" action="" class="d-inline-block" onsubmit="return confirm('Are you Sure to Delete?')">
+                  		<a href="{{route('township.edit',$town->id)}}" class="btn btn-success">Edit</a>
+                  		
+                  		<form method="post" action="{{route('township.destroy',$town->id)}}" class="d-inline-block" onsubmit="return confirm('Are you Sure to Delete?')">
                   			@csrf
-                  			
+                  			@method('DELETE')
                     		<input type="submit" name="btnsubmit" value="Delete" class="btn btn-danger">
                   		</form>
-                  		<form method="post" action="" class="d-inline-block" onsubmit="return confirm('Are you Sure to Block?')">
-                  			@csrf
-                  			
-                    		<input type="submit" name="btnsubmit" value="Block" class="btn btn-warning">
-                  		</form>
+                  		
                 	</td>
                 </tr>
-                
+                @endforeach
 
               </tbody>
             </table>

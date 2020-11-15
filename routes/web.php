@@ -17,6 +17,10 @@ Route::get('/', 'BackendController@home')->name('backend');
 
 Route::resource('customer', 'CustomerController');
 
+
+Route::post('block/{id}', 'CustomerController@block')->name('customer.block');
+
+
 Route::resource('deliver','DeliverController');
 Route::post('block/{id}','DeliverController@block')->name('deliver.block');
 
