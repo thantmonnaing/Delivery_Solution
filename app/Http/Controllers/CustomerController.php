@@ -17,7 +17,8 @@ class CustomerController extends Controller
      */
     public function index()
     {
-        //
+        $customers= Customer::where('status','!=', 1)->get();
+        return view('backend.customer.index',compact('customers'));
     }
 
     /**
@@ -27,7 +28,7 @@ class CustomerController extends Controller
      */
     public function create()
     {
-
+        return view('backend.customer.create');
     }
 
     /**
@@ -38,11 +39,24 @@ class CustomerController extends Controller
      */
     public function store(Request $request)
     {
+        // dd($request);
         $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:8|confirmed',
+            'photo' => 'required|mimes:jpeg,jpg,png',
+            'phone' => 'required|regex:/^([0-9\s\-\+\(\)]*)$/|min:10',
+            'address' => 'required',
+            'business_type' => 'required',
         ]);
+
+        if($request->file()){
+
+            $filename = time().'_'.$request->photo->getClientOriginalName();
+            $filepath = $request->file('photo')->storeAS('customerimg', $filename, 'public');
+
+            $path = '/storage/'.$filepath;
+        }
 
         $user = new User;
         $user->name = $request->name;
@@ -52,7 +66,7 @@ class CustomerController extends Controller
 
         $customer = new Customer;
         $customer->user_id = $user->id;
-        $customer->profile = $request->profile;
+        $customer->profile = $path;
         $customer->phone = $request->phone;
         $customer->address = $request->address;
         $customer->status = 0;
@@ -63,7 +77,7 @@ class CustomerController extends Controller
 
         Auth::login($user);
 
-        return redirect()->route('backend');
+        return redirect()->route('customer.index');
     }
 
     /**
@@ -74,7 +88,7 @@ class CustomerController extends Controller
      */
     public function show(Customer $customer)
     {
-        //
+        return view('backend.customer.show',compact('customer'));
     }
 
     /**
@@ -85,8 +99,7 @@ class CustomerController extends Controller
      */
     public function edit(Customer $customer)
     {
-        $user=User::all();
-        return view('backend.customeredit',compact('customer','user'));
+        return view('backend.customer.edit',compact('customer'));
     }
 
     /**
@@ -98,41 +111,52 @@ class CustomerController extends Controller
      */
     public function update(Request $request, Customer $customer)
     {
-        //dd($request);
-        //validation
-        $request-> validate([
-            "name" => "required|min:5",
-            "photo" => "sometimes|required|mimes:jpeg,bmp,png", // a.jpg
-            'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:8|confirmed',
-            'phone' => 'required',
+        // dd($request);
+
+
+        // dd($customer);
+
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255',
+            'photo' => 'sometimes|required|mimes:jpeg,jpg,png',
+            'phone' => 'required|regex:/^([0-9\s\-\+\(\)]*)$/|min:10',
             'address' => 'required',
             'business_type' => 'required',
+            'oldphoto'=> 'required',
+            'user_id'=> 'required',
+            'status'=> 'required',
         ]);
 
-        //data store
-        $user = new User;
+        if($request->file()){
+
+            if(file_exists(public_path($request->oldphoto))){
+                unlink(public_path($request->oldphoto));
+            }              
+
+            $filename = time().'_'.$request->photo->getClientOriginalName();
+            $filepath = $request->file('photo')->storeAS('customerimg', $filename, 'public');
+
+            $path = '/storage/'.$filepath;
+        }else{
+            $path = $request->oldphoto;
+        }
+
+        $user = User::find($request->user_id);
         $user->name = $request->name;
         $user->email = $request->email;
-        $user->password = Hash::make($request->password);
         $user->save();
 
-        $customer = new Customer;
-        $customer->user_id = $user->id;
-        $customer->profile = $request->profile;
+        $customer->user_id = $request->user_id;
+        $customer->profile = $path;
         $customer->phone = $request->phone;
         $customer->address = $request->address;
-        $customer->status = 0;
+        $customer->status = $request->status;
         $customer->business_type = $request->business_type;
         $customer->save();
 
-        $user->assignRole('customer');
 
-        Auth::login($user);
-
-        return redirect()->route('backend');
-
-
+        return redirect()->route('customer.index');
 
     }
 
@@ -144,6 +168,20 @@ class CustomerController extends Controller
      */
     public function destroy(Customer $customer)
     {
-        //
+        if(file_exists(public_path($customer->profile))){
+            unlink(public_path($customer->profile));
+        }        
+
+        // $user = User::find($customer->user_id);
+        // $user->delete();
+        User::where('id',$customer->user_id)->delete();
+        return redirect()->route('customer.index');
+    }
+
+    public function block($id)
+    {
+        Customer::where('id', $id)
+                  ->update(['status' => 1]);
+        return redirect()->route('customer.index');
     }
 }
