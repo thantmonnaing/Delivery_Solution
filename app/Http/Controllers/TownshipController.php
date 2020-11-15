@@ -14,7 +14,8 @@ class TownshipController extends Controller
      */
     public function index()
     {
-        //
+        $township=Township::all();
+        return view('backend.township.index',compact('township'));
     }
 
     /**
