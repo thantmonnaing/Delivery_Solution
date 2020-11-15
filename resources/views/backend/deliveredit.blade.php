@@ -86,11 +86,11 @@
               <div class="form-group">
                <label>Gender:</label>
                <div class="form-check form-check-inline">
-                 <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="male">
+                 <input class="form-check-input" type="radio" name="gender" id="inlineRadio1" value="male">
                  <label class="form-check-label" for="inlineRadio1">Male</label>
                </div>
                <div class="form-check form-check-inline">
-                 <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="female">
+                 <input class="form-check-input" type="radio" name="gender" id="inlineRadio2" value="female">
                  <label class="form-check-label" for="inlineRadio2">Female</label>
                </div>
                
@@ -119,11 +119,11 @@
             <div class="form-group">
             	<legend>Job_type:</legend>
             	<div class="form-check form-check-inline">
-               <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="fulltime">
+               <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="fulltime" name="job">
                <label class="form-check-label" for="inlineCheckbox1">Full Time</label>
              </div>
              <div class="form-check form-check-inline">
-               <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="parttime">
+               <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="parttime" name="job">
                <label class="form-check-label" for="inlineCheckbox2">Part Time</label>
              </div>
            </div>
@@ -131,31 +131,31 @@
            <div class="form-group">
              <legend>Job_day:</legend>
              <div class="form-check form-check-inline">  					
-               <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="monday">
+               <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="monday" name="day">
                <label class="form-check-label" for="inlineCheckbox1">Monday</label>
              </div>
              <div class="form-check form-check-inline"> 					
-               <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="tuesday">
+               <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="tuesday" name="day">
                <label class="form-check-label" for="inlineCheckbox2">Tuesday</label>
              </div>
              <div class="form-check form-check-inline">
-               <input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="wednesday">
+               <input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="wednesday" name="day">
                <label class="form-check-label" for="inlineCheckbox3">Wednesday</label>
              </div>
              <div class="form-check form-check-inline">  					
-               <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="thursday">
+               <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="thursday" name="day">
                <label class="form-check-label" for="inlineCheckbox1">Thursday</label>
              </div>
              <div class="form-check form-check-inline">  					
-               <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="friday">
+               <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="friday" name="day">
                <label class="form-check-label" for="inlineCheckbox2">Friday</label>
              </div>
              <div class="form-check form-check-inline">
-               <input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="saturday" >
+               <input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="saturday" name="day">
                <label class="form-check-label" for="inlineCheckbox3">Saturday</label>
              </div>
              <div class="form-check form-check-inline">
-               <input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="sunday" >
+               <input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="sunday" name="day">
                <label class="form-check-label" for="inlineCheckbox3">Sunday</label>
              </div>
            </div>
@@ -163,11 +163,11 @@
            <div class="form-group">
              <legend>Transport_type:</legend>
              <div class="form-check form-check-inline">  					
-               <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="car">
+               <input class="form-check-input" type="radio" name="transport" id="inlineRadio1" value="car">
                <label class="form-check-label" for="inlineRadio1">Car</label>
              </div>
              <div class="form-check form-check-inline"> 					
-               <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="bicycle">
+               <input class="form-check-input" type="radio" name="transport" id="inlineRadio2" value="bicycle">
                <label class="form-check-label" for="inlineRadio2">Bicycle</label>
              </div>
            </div>
@@ -175,19 +175,21 @@
            <div class="form-group">
              <legend>Payment_type:</legend>
              <div class="form-check form-check-inline"> 				
-               <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="kbz">
+               <input class="form-check-input" type="radio" name="payment" id="inlineRadio1" value="kbz">
                <label class="form-check-label" for="inlineRadio1">KBZpay</label>
              </div>
              <div class="form-check form-check-inline">  				
-               <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="wave">
+               <input class="form-check-input" type="radio" name="payment" id="inlineRadio2" value="wave">
                <label class="form-check-label" for="inlineRadio2">WaveMoney</label>
              </div>
              <div class="form-check form-check-inline">  				
-               <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3" value="okdoller">
+               <input class="form-check-input" type="radio" name="payment" id="inlineRadio3" value="okdoller">
                <label class="form-check-label" for="inlineRadio3">OKdoller</label>
              </div>
            </div>
-
+           <div class="form-group">
+             <textarea class="form-control" name="remark"></textarea>
+           </div>
            <div class="form-group">
             <input type="submit" name="btnsubmit" value="Update" class="btn btn-primary">
           </div>

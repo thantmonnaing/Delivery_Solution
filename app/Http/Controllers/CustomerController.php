@@ -85,7 +85,8 @@ class CustomerController extends Controller
      */
     public function edit(Customer $customer)
     {
-        //
+        $user=User::all();
+        return view('backend.customeredit',compact('customer','user'));
     }
 
     /**
@@ -97,7 +98,42 @@ class CustomerController extends Controller
      */
     public function update(Request $request, Customer $customer)
     {
-        //
+        //dd($request);
+        //validation
+        $request-> validate([
+            "name" => "required|min:5",
+            "photo" => "sometimes|required|mimes:jpeg,bmp,png", // a.jpg
+            'email' => 'required|string|email|max:255|unique:users',
+            'password' => 'required|string|min:8|confirmed',
+            'phone' => 'required',
+            'address' => 'required',
+            'business_type' => 'required',
+        ]);
+
+        //data store
+        $user = new User;
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->password = Hash::make($request->password);
+        $user->save();
+
+        $customer = new Customer;
+        $customer->user_id = $user->id;
+        $customer->profile = $request->profile;
+        $customer->phone = $request->phone;
+        $customer->address = $request->address;
+        $customer->status = 0;
+        $customer->business_type = $request->business_type;
+        $customer->save();
+
+        $user->assignRole('customer');
+
+        Auth::login($user);
+
+        return redirect()->route('backend');
+
+
+
     }
 
     /**

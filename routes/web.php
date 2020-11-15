@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', 'BackendController@home')->name('backend');
 
 Route::resource('customer', 'CustomerController');
+Route::resource('deliver','DeliverController');
 Route::get('signup', 'BackendController@signup')->name('signup');
 
 Auth::routes();
