@@ -10,4 +10,9 @@ class BackendController extends Controller
 	{
 		return view('backend.backend_template');
 	}
+
+	public function signup($value='')
+	{
+		return view('welcome');
+	} 
 }
