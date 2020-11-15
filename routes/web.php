@@ -17,6 +17,7 @@ Route::get('/', 'BackendController@home')->name('backend');
 
 Route::resource('customer', 'CustomerController');
 Route::resource('deliver','DeliverController');
+Route::post('block/{id}','DeliverController@block')->name('deliver.block');
 
 Route::get('signup', 'BackendController@signup')->name('signup');
 

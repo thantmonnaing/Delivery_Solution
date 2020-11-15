@@ -113,7 +113,7 @@
           </a>
         </li>
         <li class="treeview">
-          <a class="app-menu__item {{Request::is('deliver*') ? 'active' : ''}}" href="{{route('backend')}}">
+          <a class="app-menu__item {{Request::is('deliver*') ? 'active' : ''}}" href="{{route('deliver.index')}}">
             <i class="app-menu__icon fa fa-laptop"></i>
             <span class="app-menu__label">Deliver</span>
           </a>
@@ -166,5 +166,6 @@
     ga('send', 'pageview');
 }
 </script>
+@yield('script')
 </body>
 </html>

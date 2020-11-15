@@ -159,13 +159,13 @@
                             <div class="col-md-3">
                                 <div class="form-group date">
                                     <label for="start_time">Start Time</label>
-                                    <input type="date" name="start_time" class="form-control" id="start_time">
+                                    <input type="time" name="start_time" class="form-control" id="start_time">
                                 </div>
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group date">
                                     <label for="end_time">End Time</label>
-                                    <input type="date" name="end_time" class="form-control" id="end_time">
+                                    <input type="time" name="end_time" class="form-control" id="end_time">
                                 </div>
                             </div>
                         </div>
