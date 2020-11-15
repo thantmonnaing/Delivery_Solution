@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\User;
 use App\Deliver;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 
 class DeliverController extends Controller
 {
@@ -15,7 +17,8 @@ class DeliverController extends Controller
      */
     public function index()
     {
-        //
+        $deliver=Deliver::where('status','!=',1)->get();
+        return view('backend.deliver.index',compact('deliver'));
     }
 
     /**
@@ -25,7 +28,7 @@ class DeliverController extends Controller
      */
     public function create()
     {
-        //
+        return view('backend.deliver.create');
     }
 
     /**
@@ -35,8 +38,54 @@ class DeliverController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
-        //
+    {   
+        //dd($request);
+         $request-> validate([
+            "name" => "required|min:5",
+            'email' => 'required|string|email|max:255|unique:users',
+            'password' => 'required|string|min:8|confirmed',
+            
+        ]);
+
+         // If include file, upload
+        if($request->file()) {
+            $fileName = time().'_'.$request->photo->getClientOriginalName();
+
+            $filePath = $request->file('photo')->storeAs('deliverimg', $fileName, 'public');
+
+            $path = '/storage/'.$filePath;
+        }
+        
+
+        $user = new User;
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->password = Hash::make($request->password);
+
+        $user->save();
+
+        $deliver = new Deliver;
+        $deliver->user_id = $user->id;
+        $deliver->profile = $path;
+        $deliver->dob = $request->form;
+        $deliver->gender = $request->gender;
+        $deliver->phone = $request->phone;
+        $deliver->address= $request->address;
+        $deliver->job_type= $request->job;
+        $deliver->job_day= $request->day;
+        $deliver->job_time= $request->time;
+        $deliver->transport_type = $request->transport;
+        $deliver->payment_type= $request->payment;
+        $deliver->status=0;
+        $deliver->save();
+
+        $user->assignRole('deliver');
+
+        Auth::login($user);
+
+        return redirect()->route('deliver.index');
+         
+
     }
 
     /**
@@ -46,8 +95,10 @@ class DeliverController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show(Deliver $deliver)
-    {
-        //
+
+    {   
+        //dd($deliver);
+        return view('backend.deliver.show',compact('deliver'));
     }
 
     /**
@@ -59,7 +110,7 @@ class DeliverController extends Controller
     public function edit(Deliver $deliver)
     {
         $user=User::all();
-        return view('backend.deliveredit',compact('deliver','user'));
+        return view('backend.deliver.edit',compact('deliver','user'));
     }
 
     /**
@@ -75,19 +126,9 @@ class DeliverController extends Controller
         //validation
         $request-> validate([
             "name" => "required|min:5",
-            "photo" => "sometimes|required|mimes:jpeg,bmp,png", // a.jpg
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:8|confirmed',
-            'phone' => 'required',
-            'address' => 'required',
-            'dob' => 'required',
-            'gender' => 'required',
-            'job_type' => 'required',
-            'job_day' => 'required',
-            'job_time' => 'required',
-            'tansport_type' => 'required',
-            'payment_type' => 'required',
-            'remark' => 'required',
+            
         ]);
 
         // If include file, upload
@@ -111,24 +152,24 @@ class DeliverController extends Controller
 
         $deliver = new Deliver;
         $deliver->user_id = $user->id;
-        $deliver->profile = $request->profile;
+        $deliver->profile = $path;
         $deliver->dob = $request->form;
         $deliver->gender = $request->gender;
         $deliver->phone = $request->phone;
         $deliver->address= $request->address;
         $deliver->job_type= $request->job;
         $deliver->job_day= $request->day;
-        $deliver->job_time= $request->;
+        $deliver->job_time= $request->time;
         $deliver->transport_type = $request->transport;
         $deliver->payment_type= $request->payment;
-        $deliver->remark= $request->remark;
+        
         $deliver->save();
 
         $user->assignRole('deliver');
 
         Auth::login($user);
 
-        return redirect()->route('backend');
+        return redirect()->route('deliver.index');
 
     }
 
@@ -140,6 +181,14 @@ class DeliverController extends Controller
      */
     public function destroy(Deliver $deliver)
     {
-        //
+        $deliver->delete();
+        return redirect()->route('deliver.index');
+    }
+
+    public function block($id)
+    {
+        Deliver::where('id',$id)
+                ->update(['status'=>1]);
+        return redirect()->route('deliver.index');
     }
 }
