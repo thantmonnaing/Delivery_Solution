@@ -23,8 +23,6 @@ class RoleTableSeeder extends Seeder
 
         $role3=new Role;
         $role3->name="customer";
-        $role3->save();
-
-        
+        $role3->save();        
     }
 }
