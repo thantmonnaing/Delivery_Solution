@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePairsTable extends Migration
+class CreateDelivertownshipsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,22 +13,19 @@ class CreatePairsTable extends Migration
      */
     public function up()
     {
-        Schema::create('pairs', function (Blueprint $table) {
+        Schema::create('delivertownships', function (Blueprint $table) {
             $table->id();
-            $table->date('date');
-            $table->unsignedBigInteger('customer_order_id');
-            $table->foreign('customer_order_id')
-                  ->references('id')
-                  ->on('orders')
-                  ->onDelete('cascade');
-
             $table->unsignedBigInteger('deliver_id');
             $table->foreign('deliver_id')
                   ->references('id')
                   ->on('delivers')
                   ->onDelete('cascade');
 
-            $table->Integer('status')->default(0);      
+            $table->unsignedBigInteger('township_id');
+            $table->foreign('township_id')
+                  ->references('id')
+                  ->on('townships')
+                  ->onDelete('cascade');
 
             $table->timestamps();
         });
@@ -41,6 +38,6 @@ class CreatePairsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('pairs');
+        Schema::dropIfExists('delivertownships');
     }
 }
