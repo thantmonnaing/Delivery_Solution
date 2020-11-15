@@ -101,25 +101,25 @@
           </a>
         </li>
         <li class="treeview">
-          <a class="app-menu__item {{Request::is('category*') ? 'active' : ''}}" href="{{route('backend')}}">
+          <a class="app-menu__item {{Request::is('user*') ? 'active' : ''}}" href="{{route('backend')}}">
             <i class="app-menu__icon fa fa-laptop"></i>
             <span class="app-menu__label">User</span>
           </a>
         </li>
         <li class="treeview">
-          <a class="app-menu__item {{Request::is('subcategory*') ? 'active' : ''}}" href="{{route('backend')}}">
+          <a class="app-menu__item {{Request::is('customer*') ? 'active' : ''}}" href="{{route('backend')}}">
             <i class="app-menu__icon fa fa-laptop"></i>
             <span class="app-menu__label">Customer</span>
           </a>
         </li>
         <li class="treeview">
-          <a class="app-menu__item {{Request::is('item*') ? 'active' : ''}}" href="{{route('backend')}}">
+          <a class="app-menu__item {{Request::is('deliver*') ? 'active' : ''}}" href="{{route('backend')}}">
             <i class="app-menu__icon fa fa-laptop"></i>
             <span class="app-menu__label">Deliver</span>
           </a>
         </li>
         <li class="treeview">
-          <a class="app-menu__item {{Request::is('brand*') ? 'active' : ''}}" href="{{route('backend')}}">
+          <a class="app-menu__item {{Request::is('order*') ? 'active' : ''}}" href="{{route('backend')}}">
             <i class="app-menu__icon fa fa-laptop"></i>
             <span class="app-menu__label">Order</span>
           </a>
