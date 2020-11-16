@@ -75,7 +75,7 @@ class CustomerController extends Controller
 
         $user->assignRole('customer');
 
-        Auth::login($user);
+        // Auth::login($user);
 
         return redirect()->route('customer.index');
     }
@@ -88,7 +88,7 @@ class CustomerController extends Controller
      */
     public function show(Customer $customer)
     {
-        return view('backend.customer.show',compact('customer'));
+        return view('backend.customer.show',compact('customer'));        
     }
 
     /**
@@ -183,5 +183,12 @@ class CustomerController extends Controller
         Customer::where('id', $id)
                   ->update(['status' => 1]);
         return redirect()->route('customer.index');
+    }
+
+    public function unblock($id)
+    {
+        Customer::where('id', $id)
+                  ->update(['status' => 0]);
+        return redirect()->route('blacklist');
     }
 }

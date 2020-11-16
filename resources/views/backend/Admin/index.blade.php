@@ -3,11 +3,13 @@
 <main class="app-content">
 	<div class="app-title">
 		<div>
-			<h1><i class="fa fa-dashboard"></i> Category Lists</h1>
+			<h1><i class="fa fa-dashboard"></i> Admin Lists</h1>
 		</div>
+        @if(Auth::user()->email == 'admin@gmail.com')
 		<ul class="app-breadcrumb breadcrumb">
-			<li class="breadcrumb-item"><a href="{{route('customer.create')}}" class="btn btn-primary">Add Customer</a></li>
+			<li class="breadcrumb-item"><a href="{{route('admin.create')}}" class="btn btn-primary">Add Admin</a></li>
 		</ul>
+        @endif
 	</div>
 	<div class="row">
         <div class="col-md-12">
@@ -27,22 +29,16 @@
                                 @php 
                                 $i = 1; 
                                 @endphp
-                                @foreach($customers as $row)
+                                @foreach($users as $row)
                                     <tr>
                                         <td> {{$i++}} </td>
-                                        <td> {{$row->user->name}} </td>
-                                        <td> {{$row->user->email}} </td>
-                                        <td> 
-                                            <a href="{{route('customer.edit',$row->id)}}" class="btn btn-success">Edit</a>
-                                            <a href="{{route('customer.show',$row->id)}}" class="btn btn-info">Detail</a> 
-                                            <form method="post" action="{{route('customer.destroy',$row->id)}}" onsubmit="return confirm('Are you sure to Delete?')" class="d-inline-block">
+                                        <td> {{$row->name}} </td>
+                                        <td> {{$row->email}} </td>
+                                        <td>
+                                            <form method="post" action="{{route('customer.destroy',$row->id)}}" onsubmit="return confirm('Are you sure to Delete?')" class="d-inline-block" id="myform">
                                                 @csrf
                                                 @method('DELETE')
-                                                <input type="submit" name="btnsubmit" value="Delete" class="btn btn-danger">                                  
-                                            </form>
-                                            <form method="post" action="{{route('customer.block',$row->id)}}" onsubmit="return confirm('Are you sure to Block?')" class="d-inline-block">
-                                                @csrf
-                                                <input type="submit" name="btnsubmit" value="Block" class="btn btn-warning">                                  
+                                                <input type="submit" name="btnsubmit" value="Delete" class="btn btn-danger" @if(Auth::user()->email != 'admin@gmail.com') {{"disabled = true;"}} @endif>
                                             </form>
                                         </td>
                                     </tr>

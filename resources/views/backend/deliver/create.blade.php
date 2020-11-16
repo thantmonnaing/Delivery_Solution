@@ -4,19 +4,15 @@
 <main class="app-content">
 	<div class="app-title">
 		<div>
-			<h1><i class="fa fa-dashboard"></i> Blank Page</h1>
-			<p>Start a beautiful journey here</p>
+			<h1><i class="fa fa-dashboard"></i> Deliver Form</h1>
 		</div>
 		<ul class="app-breadcrumb breadcrumb">
-			<li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
-			<li class="breadcrumb-item"><a href="{{route('deliver.index')}}">Back page</a></li>
+			<li class="breadcrumb-item"><a href="{{route('deliver.index')}}" class="btn btn-primary">Back</a></li>
 		</ul>
 	</div>
 	<div class="row">
 		<div class="col-md-12 col-lg-12 col-sm-12 col-12">
 			<div class="tile">
-				<h2 class="d-inline-block">Deliver Form</h2>
-				<a href="{{route('deliver.index')}}" class="btn btn-info float-right">Back</a>
 				<form method="post" action="{{route('deliver.store')}}" enctype="multipart/form-data">
 					@csrf
 					<div class="form-group">

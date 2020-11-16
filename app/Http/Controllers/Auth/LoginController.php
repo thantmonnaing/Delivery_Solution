@@ -45,7 +45,7 @@ class LoginController extends Controller
         //Check user role
         switch ($roles[0]) {
             case 'admin':
-                return '/';
+                return 'admin';
             break;
 
             default:

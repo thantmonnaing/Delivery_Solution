@@ -77,9 +77,7 @@
         <!-- User Menu-->
         <li class="dropdown"><a class="app-nav__item" href="#" data-toggle="dropdown" aria-label="Open Profile Menu"><i class="fa fa-user fa-lg"></i></a>
           <ul class="dropdown-menu settings-menu dropdown-menu-right">
-            <li><a class="dropdown-item" href="page-user.html"><i class="fa fa-cog fa-lg"></i> Settings</a></li>
-            <li><a class="dropdown-item" href="page-user.html"><i class="fa fa-user fa-lg"></i> Profile</a></li>
-            <li><a class="dropdown-item" href="{{route('signup')}}"><i class="fa fa-sign-out fa-lg"></i> Logout</a></li>
+            <li><a class="dropdown-item" href="{{route('admin.logout')}}"><i class="fa fa-sign-out fa-lg"></i> Logout</a></li>
           </ul>
         </li>
       </ul>
@@ -89,8 +87,8 @@
     <aside class="app-sidebar">
       <div class="app-sidebar__user"><img class="app-sidebar__user-avatar" src="https://s3.amazonaws.com/uifaces/faces/twitter/jsa/48.jpg" alt="User Image">
         <div>
-          <p class="app-sidebar__user-name">John Doe</p>
-          <p class="app-sidebar__user-designation">Frontend Developer</p>
+          <p class="app-sidebar__user-name">@if(Auth::check()){{ Auth::user()->name }} @endif</p>
+          <p class="app-sidebar__user-designation">Admin</p>
         </div>
       </div>
       <ul class="app-menu">
@@ -101,9 +99,9 @@
           </a>
         </li>
         <li class="treeview">
-          <a class="app-menu__item {{Request::is('user*') ? 'active' : ''}}" href="{{route('backend')}}">
+          <a class="app-menu__item {{Request::is('admin*') ? 'active' : ''}}" href="{{route('admin.index')}}">
             <i class="app-menu__icon fa fa-laptop"></i>
-            <span class="app-menu__label">User</span>
+            <span class="app-menu__label">Admin</span>
           </a>
         </li>
         <li class="treeview">
@@ -129,17 +127,17 @@
             <i class="app-menu__icon fa fa-laptop"></i>
             <span class="app-menu__label">Pair</span>
           </a>
-        </li>
-        <li class="treeview">
-          <a class="app-menu__item {{Request::is('order*') ? 'active' : ''}}" href="{{route('backend')}}">
-            <i class="app-menu__icon fa fa-laptop"></i>
-            <span class="app-menu__label">Way</span>
-          </a>
-        </li>
+        </li>        
         <li class="treeview">
           <a class="app-menu__item {{Request::is('order*') ? 'active' : ''}}" href="{{route('backend')}}">
             <i class="app-menu__icon fa fa-laptop"></i>
             <span class="app-menu__label">Township</span>
+          </a>
+        </li>
+        <li class="treeview">
+          <a class="app-menu__item {{Request::is('order*') ? 'active' : ''}}" href="{{route('blacklist')}}">
+            <i class="app-menu__icon fa fa-laptop"></i>
+            <span class="app-menu__label">Black List</span>
           </a>
         </li>
       </ul>
@@ -166,6 +164,5 @@
     ga('send', 'pageview');
 }
 </script>
-@yield('script')
 </body>
 </html>

@@ -13,16 +13,41 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::middleware('role:admin')->group(function (){
+
 Route::get('/', 'BackendController@home')->name('backend');
+
+// customer
 
 Route::resource('customer', 'CustomerController');
 
-Route::post('block/{id}', 'CustomerController@block')->name('customer.block');
+Route::post('customerblock/{id}', 'CustomerController@block')->name('customer.block');
+
+Route::get('customerunblock/{id}','CustomerController@unblock')->name('customer.unblock');
+
+//deliver
 
 Route::resource('deliver','DeliverController');
+
 Route::post('block/{id}','DeliverController@block')->name('deliver.block');
 
+Route::get('unblock/{id}','DeliverController@unblock')->name('deliver.unblock');
+
+//admin
+
+Route::resource('admin','AdminController');
+
+Route::get('adminlogout', 'AdminController@logout')->name('admin.logout');
+
+Route::post('adminregister', 'AdminController@store')->name('admin.register');
+
+// blacklist
+
+Route::get('blacklist','BackendController@blacklist')->name('blacklist');
+
 Route::get('signup', 'BackendController@signup')->name('signup');
+
+});
 
 Auth::routes();
 

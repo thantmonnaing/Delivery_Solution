@@ -81,7 +81,7 @@ class DeliverController extends Controller
 
         $user->assignRole('deliver');
 
-        Auth::login($user);
+        // Auth::login($user);
 
         return redirect()->route('deliver.index');
          
@@ -190,5 +190,12 @@ class DeliverController extends Controller
         Deliver::where('id',$id)
                 ->update(['status'=>1]);
         return redirect()->route('deliver.index');
+    }
+
+    public function unblock($id)
+    {        
+        Deliver::where('id',$id)
+                ->update(['status'=>0]);
+        return redirect()->route('blacklist');
     }
 }
