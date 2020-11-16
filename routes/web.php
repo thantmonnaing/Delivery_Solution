@@ -21,11 +21,13 @@ Route::get('/', 'BackendController@home')->name('backend');
 
 Route::resource('customer', 'CustomerController');
 
+
 Route::post('customerblock/{id}', 'CustomerController@block')->name('customer.block');
 
 Route::get('customerunblock/{id}','CustomerController@unblock')->name('customer.unblock');
 
 //deliver
+
 
 Route::resource('deliver','DeliverController');
 
@@ -44,6 +46,9 @@ Route::post('adminregister', 'AdminController@store')->name('admin.register');
 // blacklist
 
 Route::get('blacklist','BackendController@blacklist')->name('blacklist');
+
+Route::resource('township','TownshipController');
+
 
 Route::get('signup', 'BackendController@signup')->name('signup');
 

@@ -14,7 +14,8 @@ class TownshipController extends Controller
      */
     public function index()
     {
-        //
+        $township=Township::all();
+        return view('backend.township.index',compact('township'));
     }
 
     /**
@@ -24,7 +25,7 @@ class TownshipController extends Controller
      */
     public function create()
     {
-        //
+        return view('backend.township.create');
     }
 
     /**
@@ -35,7 +36,23 @@ class TownshipController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //dd($request);
+
+        //validation
+        $request-> validate([
+            "name" => "required|min:5",
+            "price" => "required",
+        ]);
+
+        // store
+        $township = new Township;
+        $township->codeno = uniqid();
+        $township->name = $request->name;
+        $township->price= $request->price;
+        $township->save();
+
+         return redirect()->route('township.index');
+
     }
 
     /**
@@ -56,8 +73,10 @@ class TownshipController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit(Township $township)
-    {
-        //
+
+    {   
+        //dd($township);
+        return view('backend.township.edit',compact('township'));
     }
 
     /**
@@ -69,7 +88,20 @@ class TownshipController extends Controller
      */
     public function update(Request $request, Township $township)
     {
-        //
+        //validation
+        $request-> validate([
+            "name" => "required|min:5",
+            "price" => "required",
+        ]);
+
+        // store
+        
+        $township->codeno = uniqid();
+        $township->name = $request->name;
+        $township->price= $request->price;
+        $township->save();
+
+         return redirect()->route('township.index');
     }
 
     /**
@@ -80,6 +112,7 @@ class TownshipController extends Controller
      */
     public function destroy(Township $township)
     {
-        //
+        $township->delete();
+        return redirect()->route('township.index');
     }
 }

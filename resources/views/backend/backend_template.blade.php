@@ -123,19 +123,19 @@
           </a>
         </li>
         <li class="treeview">
-          <a class="app-menu__item {{Request::is('order*') ? 'active' : ''}}" href="{{route('backend')}}">
+          <a class="app-menu__item {{Request::is('pair*') ? 'active' : ''}}" href="{{route('backend')}}">
             <i class="app-menu__icon fa fa-laptop"></i>
             <span class="app-menu__label">Pair</span>
           </a>
         </li>        
         <li class="treeview">
-          <a class="app-menu__item {{Request::is('order*') ? 'active' : ''}}" href="{{route('backend')}}">
+          <a class="app-menu__item {{Request::is('township*') ? 'active' : ''}}" href="{{route('township.index')}}">
             <i class="app-menu__icon fa fa-laptop"></i>
             <span class="app-menu__label">Township</span>
           </a>
         </li>
         <li class="treeview">
-          <a class="app-menu__item {{Request::is('order*') ? 'active' : ''}}" href="{{route('blacklist')}}">
+          <a class="app-menu__item {{Request::is('blacklist*') ? 'active' : ''}}" href="{{route('blacklist')}}">          
             <i class="app-menu__icon fa fa-laptop"></i>
             <span class="app-menu__label">Black List</span>
           </a>
