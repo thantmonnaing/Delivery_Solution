@@ -70,6 +70,13 @@ Route::get('/', 'FrontendController@index')->name('main');
 
 Route::get('frontendlogin', 'FrontendController@login')->name('frontend.login');
 
+Route::get('customerregister', 'FrontendController@customerregister')->name('frontend.customerregister');
+
+Route::get('deliverregister', 'FrontendController@deliverregister')->name('frontend.deliverregister');
+
+Route::post('customerstore', 'FrontendController@customerstore')->name('frontend.customerstore');
+
+Route::post('deliverstore', 'FrontendController@deliverstore')->name('frontend.deliverstore');
 
 
 

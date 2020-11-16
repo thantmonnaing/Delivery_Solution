@@ -1,7 +1,7 @@
 @extends('frontend.frontend_template')
 
 @section('content')
-	<div class="jumbotron jumbotron-fluid subtitle bg-info mt-1" >
+	<div class="jumbotron jumbotron-fluid subtitle bg-info" >
 		<div class="container ">
 			<h1 class="text-center">Create Account</h1>
 		</div>
@@ -10,7 +10,7 @@
 	<div class="container my-5">
 		<div class="row justify-content-center">
 			<div class="col-8">
-				<form method="post" action="{{route('deliver.store')}}" enctype="multipart/form-data">
+				<form method="post" action="{{route('frontend.deliverstore')}}" enctype="multipart/form-data">
 					@csrf
 					<div class="form-group">
 						<label>Photo</label>
