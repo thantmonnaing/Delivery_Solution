@@ -1,53 +1,71 @@
 @extends('frontend.frontend_template')
 @section('content')
-<section >
-	<div class="banner-main">
-		<img src="{{asset('frontend_asset/images/banner.jpg')}}" alt="#"/>
-		<div class="container">
-			<div class="text-bg">
-				<h1>Delivery<br><strong class="white">Solution</strong></h1>
-				<div class="container">
-					<form class="main-form">
-						<h3>Calculate Price</h3>
-						<div class="row">
-							<div class="col-md-9 col-12">
-								<div class="row">
-									<div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-12">
-										<label >Keywords</label>
-										<input class="form-control" placeholder="" type="text" name="">
-									</div>
-									<div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-12">
-										<label >Category</label>
-										<select class="form-control" name="Any">
-											<option>Any</option>
-											<option>Option 1</option>
-											<option>Option 2</option>
-											<option>Option 3</option>
-										</select>
-									</div>
-									<div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-12">
-										<label >Min Price</label>
-										<input class="form-control" placeholder="00.0" type="text" name="00.0">
-									</div>
-									<div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-12">
-										<label >Duration</label>
-										<input class="form-control" placeholder="Any" type="text" name="Any">
-									</div>
-									<div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-12">
-										<label >Date</label>
-										<input class="form-control" placeholder="Any" type="date" name="Any">
-									</div>
-									<div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-12">
-										<label >Max Price</label>
-										<input class="form-control" placeholder="00.0" type="text" name="00.0">
+<section>
+	<div class="container mt-5">
+		<div class="row justify-content-center">
+			<div class="col-md-8">
+				<div class="card">
+					<div class="card-header">{{ __('Login') }}</div>
+
+					<div class="card-body">
+						<form method="POST" action="{{ route('login') }}">
+							@csrf
+
+							<div class="form-group row">
+								<label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
+
+								<div class="col-md-6">
+									<input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
+
+									@error('email')
+									<span class="invalid-feedback" role="alert">
+										<strong>{{ $message }}</strong>
+									</span>
+									@enderror
+								</div>
+							</div>
+
+							<div class="form-group row">
+								<label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
+
+								<div class="col-md-6">
+									<input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
+
+									@error('password')
+									<span class="invalid-feedback" role="alert">
+										<strong>{{ $message }}</strong>
+									</span>
+									@enderror
+								</div>
+							</div>
+
+							<div class="form-group row">
+								<div class="col-md-6 offset-md-4">
+									<div class="form-check">
+										<input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
+
+										<label class="form-check-label" for="remember">
+											{{ __('Remember Me') }}
+										</label>
 									</div>
 								</div>
 							</div>
-							<div class="col-xl-3 col-lg-3 col-md-3 col-sm-12 col-12">
-								<a href="#">search</a>
+
+							<div class="form-group row mb-0">
+								<div class="col-md-8 offset-md-4">
+									<button type="submit" class="btn btn-primary">
+										{{ __('Login') }}
+									</button>
+
+									@if (Route::has('password.request'))
+									<a class="btn btn-link" href="{{ route('password.request') }}">
+										{{ __('Forgot Your Password?') }}
+									</a>
+									@endif
+								</div>
 							</div>
-						</div>
-					</form>
+						</form>
+					</div>
 				</div>
 			</div>
 		</div>

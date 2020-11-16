@@ -72,7 +72,14 @@
                               <ul class="menu-area-main">
                                  <li class="active"> <a href="#">Home</a> </li>
                                  <li> <a href="#about">Register</a> </li>
-                                 <li><a href="#travel">Login</a></li>
+                                 <li>
+                                 @if(Auth::check())
+                                    <a href="#">{{ Auth::user()->name }}</a>
+                                 @else                                 
+                                    <a href="{{route('frontend.login')}}">Login
+                                    </a>
+                                 </li>
+                                 @endif
                                  <li><a href="#blog">About Us</a></li>
                                  <li><a href="#contact">Contact Us</a></li>
                               </ul>
