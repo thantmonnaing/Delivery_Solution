@@ -10,8 +10,8 @@
         <li class="breadcrumb-item"><a href="{{route('customer.index')}}" class="btn btn-primary">Back</a></li>
       </ul>
     </div>
-    <div class="title">
-      <div class="title-body">
+    <div class="tile">
+      <div class="tile-body">
         <div class="row">
           <div class="col-md-12">
             <div class="row m-5">
