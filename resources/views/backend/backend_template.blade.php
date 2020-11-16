@@ -117,7 +117,7 @@
           </a>
         </li>
         <li class="treeview">
-          <a class="app-menu__item {{Request::is('order*') ? 'active' : ''}}" href="{{route('backend')}}">
+          <a class="app-menu__item {{Request::is('order*') ? 'active' : ''}}" href="{{route('order.index')}}">
             <i class="app-menu__icon fa fa-laptop"></i>
             <span class="app-menu__label">Order</span>
           </a>

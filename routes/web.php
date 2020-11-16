@@ -47,7 +47,13 @@ Route::post('adminregister', 'AdminController@store')->name('admin.register');
 
 Route::get('blacklist','BackendController@blacklist')->name('blacklist');
 
+// township
+
 Route::resource('township','TownshipController');
+
+//order
+
+Route::resource('order','OrderController');
 
 
 Route::get('signup', 'BackendController@signup')->name('signup');

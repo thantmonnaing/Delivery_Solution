@@ -4,7 +4,7 @@
     <main class="app-content">
         <div class="app-title">
             <div>
-                <h1><i class="fa fa-dashboard"></i> Blacklist Detail</h1>
+                <h1><i class="fa fa-dashboard"></i> Customer Detail</h1>
             </div>
             <ul class="app-breadcrumb breadcrumb">
                 <li class="breadcrumb-item"><a href="{{route('customer.index')}}" class="btn btn-primary">Back</a></li>
@@ -34,10 +34,14 @@
                                         <p> {{$customer->business_type}} </p>
                                     </div>
                                     <div class="card-footer">
+                                        @if($customer->status == 0)
                                         <form method="post" action="{{route('customer.block',$customer->id)}}" onsubmit="return confirm('Are you sure to Block?')" class="d-inline-block">
                                             @csrf
                                             <input type="submit" name="btnsubmit" value="Block" class="btn btn-danger">                                 
                                         </form>
+                                        @else
+                                            <a href="{{route('customer.unblock',$customer->id)}}" class="btn btn-success">Unblock</a> 
+                                        @endif    
                                     </div>
                                 </div>
                             </div>
