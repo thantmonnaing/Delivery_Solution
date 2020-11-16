@@ -62,8 +62,10 @@ Route::get('signup', 'BackendController@signup')->name('signup');
 
 Auth::routes();
 
-Route::get('/', 'FrontendController@index')->name('main');
-
 Route::get('/home', 'HomeController@index')->name('home');
+
+// frontend
+
+Route::get('/', 'FrontendController@index')->name('main');
 
 

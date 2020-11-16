@@ -8,7 +8,7 @@
       <meta name="viewport" content="width=device-width, initial-scale=1">
       <meta name="viewport" content="initial-scale=1, maximum-scale=1">
       <!-- site metas -->
-      <title>Eforlad travel</title>
+      <title>Delivery Solution</title>
       <meta name="keywords" content="">
       <meta name="description" content="">
       <meta name="author" content="">
@@ -59,9 +59,9 @@
             <div class="container">
                <div class="row">
                   <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col logo_section">
-                     <div class="full">
+                     <div class="full mt-0">
                         <div class="center-desk">
-                           <div class="logo"> <a href="index.html"><img src="{{asset('frontend_asset/images/logo.png')}}" alt="#"></a> </div>
+                           <div class="logo"><a href=""><img src="{{asset('frontend_asset/images/logo.png')}}" alt="#" style="width: 100px;"> <span style="font-size: 20px;">Delivery Solution</span></a> </div>
                         </div>
                      </div>
                   </div>
@@ -71,9 +71,9 @@
                            <nav class="main-menu">
                               <ul class="menu-area-main">
                                  <li class="active"> <a href="#">Home</a> </li>
-                                 <li> <a href="#about">About</a> </li>
-                                 <li><a href="#travel">Travel</a></li>
-                                 <li><a href="#blog">Blog</a></li>
+                                 <li> <a href="#about">Register</a> </li>
+                                 <li><a href="#travel">Login</a></li>
+                                 <li><a href="#blog">About Us</a></li>
                                  <li><a href="#contact">Contact Us</a></li>
                               </ul>
                            </nav>
@@ -86,62 +86,9 @@
          <!-- end header inner -->
       </header>
       <!-- end header -->
-      <section >
-         <div class="banner-main">
-            <img src="{{asset('frontend_asset/images/banner.jpg')}}" alt="#"/>
-            <div class="container">
-               <div class="text-bg">
-                  <h1>America<br><strong class="white">Amazing Tour</strong></h1>
-                  <div class="button_section"> <a class="main_bt" href="#">Read More</a>  </div>
-                  <div class="container">
-                     <form class="main-form">
-                        <h3>Find Your Tour</h3>
-                        <div class="row">
-                           <div class="col-md-9">
-                              <div class="row">
-                                 <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-12">
-                                    <label >Keywords</label>
-                                    <input class="form-control" placeholder="" type="text" name="">
-                                 </div>
-                                 <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-12">
-                                    <label >Category</label>
-                                    <select class="form-control" name="Any">
-                                       <option>Any</option>
-                                       <option>Option 1</option>
-                                       <option>Option 2</option>
-                                       <option>Option 3</option>
-                                    </select>
-                                 </div>
-                                 <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-12">
-                                    <label >Min Price</label>
-                                    <input class="form-control" placeholder="00.0" type="text" name="00.0">
-                                 </div>
-                                 <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-12">
-                                    <label >Duration</label>
-                                    <input class="form-control" placeholder="Any" type="text" name="Any">
-                                 </div>
-                                 <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-12">
-                                    <label >Date</label>
-                                    <input class="form-control" placeholder="Any" type="date" name="Any">
-                                 </div>
-                                 <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-12">
-                                    <label >Max Price</label>
-                                    <input class="form-control" placeholder="00.0" type="text" name="00.0">
-                                 </div>
-                              </div>
-                           </div>
-                           <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12 col-12">
-                              <a href="#">search</a>
-                           </div>
-                        </div>
-                     </form>
-                  </div>
-               </div>
-            </div>
-         </div>
-      </section>
+      @yield('content')
       <!-- about -->
-      <div id="about" class="about">
+      {{-- <div id="about" class="about">
          <div class="container">
             <div class="row">
                <div class="col-md-12 ">
@@ -167,10 +114,10 @@
             </div>
             <a href="#">Read More</a>
          </div>
-      </div>
+      </div> --}}
       <!-- end about -->
       <!-- traveling -->
-      <div id="travel" class="traveling">
+      {{-- <div id="travel" class="traveling">
          <div class="container">
             <div class="row">
                <div class="col-md-12 ">
@@ -223,10 +170,10 @@
                </div>
             </div>
          </div>
-      </div>
+      </div> --}}
       <!-- end traveling -->
       <!--London -->
-      <div class="London">
+      {{-- <div class="London">
          <div class="container">
             <div class="row">
                <div class="col-md-12">
@@ -242,10 +189,10 @@
                <figure><img src="{{asset('frontend_asset/images/London.jpg')}}" alt="img"/></figure>
             </div>
          </div>
-      </div>
+      </div> --}}
       <!-- end London -->
       <!--Tours -->
-      <div class="Tours">
+      {{-- <div class="Tours">
          <div class="container">
             <div class="row">
                <div class="col-md-12">
@@ -274,10 +221,10 @@
                </div>
             </section>
          </div>
-      </div>
+      </div> --}}
       <!-- end Tours -->
       <!-- Amazing -->
-      <div class="amazing">
+      {{-- <div class="amazing">
          <div class="container">
             <div class="row">
                <div class="col-md-12">
@@ -289,10 +236,10 @@
                </div>
             </div>
          </div>
-      </div>
+      </div> --}}
       <!-- end Amazing -->
       <!-- our blog -->
-      <div id="blog" class="blog">
+      {{-- <div id="blog" class="blog">
          <div class="container">
             <div class="row">
                <div class="col-md-12">
@@ -333,10 +280,10 @@
                </div>
             </div>
          </div>
-      </div>
+      </div> --}}
       <!-- end our blog -->
       <!-- footer -->
-      <footer>
+      {{-- <footer>
          <div id="contact" class="footer">
             <div class="container">
                <div class="row pdn-top-30">
@@ -393,7 +340,7 @@
                </div>
             </div>
          </div>
-      </footer>
+      </footer> --}}
       <!-- end footer -->
       <!-- Javascript files-->
       <script src="{{asset('frontend_asset/js/jquery.min.js')}}"></script>
@@ -406,6 +353,7 @@
       <script src="{{asset('frontend_asset/js/custom.js')}}"></script>
       <!-- javascript --> 
       <script src="{{asset('frontend_asset/js/owl.carousel.js')}}"></script>
+      @yield('script')
       <script>
          $(document).ready(function() {
            var owl = $('.owl-carousel');
