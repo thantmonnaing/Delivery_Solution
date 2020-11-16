@@ -84,10 +84,10 @@ class FrontendController extends Controller
             'phone' => 'required|regex:/^([0-9\s\-\+\(\)]*)$/|min:10',
             'address' => 'required',
             'time' => 'required',
-            // 'job' => 'required',
+            //'job' => 'required',
             // 'job_day' => 'required',
             // 'transport_type' => 'required',
-            // 'payment_type' => 'required',
+            //'payment' => 'required',
             
         ]);
 

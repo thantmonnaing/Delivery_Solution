@@ -204,7 +204,7 @@
 					<div class="form-group">
 						<label class="mr-5">Payment Type</label>
 						<div class="form-check form-check-inline">	
-							<input class="form-check-input" type="checkbox" name="payment" id="payment_type1" value="kbz"  >
+							<input class="form-check-input" type="checkbox" name="payment" id="payment_type1" value="kbz">
 							<label class="form-check-label" for="payment_type1">KBZpay</label>
 						</div>
 						<div class="form-check form-check-inline">  				
