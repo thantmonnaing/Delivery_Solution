@@ -69,3 +69,6 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/', 'FrontendController@index')->name('main');
 
 
+
+
+

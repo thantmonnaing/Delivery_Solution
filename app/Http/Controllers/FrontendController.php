@@ -10,4 +10,6 @@ class FrontendController extends Controller
 	{
 		return view('frontend.main');
 	}
+
+	
 }
