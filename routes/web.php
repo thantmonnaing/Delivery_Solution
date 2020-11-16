@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware('role:admin')->group(function (){
 
-Route::get('/', 'BackendController@home')->name('backend');
+Route::get('backend', 'BackendController@home')->name('backend');
 
 // customer
 
@@ -61,6 +61,8 @@ Route::get('signup', 'BackendController@signup')->name('signup');
 });
 
 Auth::routes();
+
+Route::get('/', 'FrontendController@index')->name('main');
 
 Route::get('/home', 'HomeController@index')->name('home');
 

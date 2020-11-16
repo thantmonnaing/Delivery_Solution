@@ -103,6 +103,6 @@ class AdminController extends Controller
     public function logout($value='')
     {
         Auth::logout();
-        return view('home');
+        return view('frontend.frontend_template');
     }
 }
