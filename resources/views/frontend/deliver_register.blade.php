@@ -22,7 +22,7 @@
 
 					<div class="form-group">
 						<label>Name:</label>
-						<input type="text" name="name" class="form-control @error('name') is-invalid @enderror" value="">
+						<input type="text" name="name" class="form-control @error('name') is-invalid @enderror" value="{{old('name')}}">
 						@error('name')
 						<span class="invalid-feedback" role="alert">
 							<strong>{{ $message }}</strong>
@@ -60,20 +60,33 @@
 					</div>
 
 					<div class="form-group">
-						<label>Date of Birth:</label>
-						<input type="date" name="form" class="form-control" id="fromDate" value="">
+						<label for="birthday">Date of Birth:</label>
+						<input id="birthday" type="date" name="form" class="form-control  @error('birthday') is-invalid @enderror"  value="{{ old('form') }}" required autocomplete="birthday" autofocus >
+
+						@error('birthday')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
 					</div>
 
 					<div class="form-group">
-						<label class="mr-5">Gender:</label>
-						<div class="form-check form-check-inline">
-							<input class="form-check-input" type="radio" name="gender" id="inlineRadio1" value="male">
-							<label class="form-check-label" for="inlineRadio1">Male</label>
-						</div>
-						<div class="form-check form-check-inline">
-							<input class="form-check-input" type="radio" name="gender" id="inlineRadio2" value="female">
-							<label class="form-check-label" for="inlineRadio2">Female</label>
-						</div>               
+						<div id="gender-group" class="form-group{{ $errors->has('gender') ? ' has-error' : '' }}">
+							<label class="mr-5">Gender:</label>
+							<div class="form-check form-check-inline">
+								<input class="form-check-input" type="radio" name="gender" id="male"  value="Male"> {{ (old('sex') == 'male') ? 'checked' : '' }}
+								<label class="form-check-label" for="male">Male</label>
+							</div>
+							<div class="form-check form-check-inline">
+								<input class="form-check-input" type="radio" name="gender" id="female" value="Female"> {{ (old('sex') == 'female') ? 'checked' : '' }}
+								<label class="form-check-label" for="female">Female</label>
+							</div>
+							 @error('gender')
+                                <span class="help-block">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+						</div>              
 					</div>
 
 					<div class="form-group">
@@ -97,19 +110,26 @@
 					</div>
 
 					<div class="form-group">
-						<label class="mr-5 pr-5">Job_type:</label>
-						<div class="form-check form-check-inline">
-							<input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="fulltime" name="job">
-							<label class="form-check-label" for="inlineCheckbox1">Full Time</label>
-						</div>
-						<div class="form-check form-check-inline">
-							<input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="parttime" name="job">
-							<label class="form-check-label" for="inlineCheckbox2">Part Time</label>
+						<div id="job-group" class="form-group{{ $errors->has('job') ? ' has-error' : '' }}">
+							<label class="mr-5 pr-5">Job Type</label>
+							<div class="form-check form-check-inline">
+								<input class="form-check-input" type="radio" id="fulltime" name="job" value="{{old('time')}}"> {{ (old('sex') == 'fulltime') ? 'checked' : '' }}
+								<label class="form-check-label" for="fulltime">Full Time</label>
+							</div>
+							<div class="form-check form-check-inline">
+								<input class="form-check-input" type="radio" id="parttime" name="job" value="{{old('time')}}"> {{ (old('sex') == 'parttime') ? 'checked' : '' }}
+								<label class="form-check-label" for="parttime">Part Time</label>
+							</div>
+							@error('job')
+                                <span class="help-block">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
 						</div>
 					</div>
 
 					<div class="form-group">
-						<label class="mr-5 pr-5">Job_day:</label>
+						<label class="mr-5 pr-5">Job Day</label>
 						<div class="form-check form-check-inline">  					
 							<input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="monday" name="day">
 							<label class="form-check-label" for="inlineCheckbox1">Monday</label>
@@ -141,24 +161,34 @@
 					</div>
 
 					<div class="form-group row">
-						<label class=" mr-4 mt-4 ml-3 pr-5" >Job Time:</label>
+						<label class=" mr-4 mt-4 ml-3 pr-5" >Job Time</label>
 
 						<div class="col-md-3">
 							<div class="form-group date">
 								<label for="start_time">Start Time</label>
-								<input type="time" name="time" class="form-control" id="start_time">
+								<input type="time" name="time" class="form-control @error('time') is-invalid @enderror"  value="{{ old('time') }}" id="start_time" required autocomplete="birthday" autofocus >
+								@error('time')
+                            	<span class="invalid-feedback" role="alert">
+                                	<strong>{{ $message }}</strong>
+                            	</span>
+                        		@enderror
 							</div>
 						</div>
 						<div class="col-md-3">
 							<div class="form-group date">
 								<label for="end_time">End Time</label>
-								<input type="time" name="time" class="form-control" id="end_time">
+								<input type="time" name="time" class="form-control @error('time') is-invalid @enderror"  value="{{ old('time') }}" id="end_time" required autocomplete="birthday" autofocus>
+								@error('time')
+                            	<span class="invalid-feedback" role="alert">
+                                	<strong>{{ $message }}</strong>
+                            	</span>
+                        		@enderror
 							</div>
 						</div>
 					</div>
 
 					<div class="form-group">
-						<label class="mr-5">Transport_type:</label>
+						<label class="mr-5">Trasport Type</label>
 						<div class="form-check form-check-inline">  					
 							<input class="form-check-input" type="radio" name="transport" id="inlineRadio1" value="car">
 							<label class="form-check-label" for="inlineRadio1">Car</label>
@@ -170,18 +200,18 @@
 					</div>
 
 					<div class="form-group">
-						<label class="mr-5">Payment_type:</label>
+						<label class="mr-5">Payment Type</label>
 						<div class="form-check form-check-inline">	
-							<input class="form-check-input" type="radio" name="payment" id="inlineRadio1" value="kbz">
-							<label class="form-check-label" for="inlineRadio1">KBZpay</label>
+							<input class="form-check-input" type="checkbox" name="payment" id="payment_type1" value="kbz">
+							<label class="form-check-label" for="payment_type1">KBZpay</label>
 						</div>
 						<div class="form-check form-check-inline">  				
-							<input class="form-check-input" type="radio" name="payment" id="inlineRadio2" value="wave">
-							<label class="form-check-label" for="inlineRadio2">WaveMoney</label>
+							<input class="form-check-input" type="checkbox" name="payment" id="payment_type2" value="wave">
+							<label class="form-check-label" for="payment_type2">WaveMoney</label>
 						</div>
 						<div class="form-check form-check-inline">  				
-							<input class="form-check-input" type="radio" name="payment" id="inlineRadio3" value="okdoller">
-							<label class="form-check-label" for="inlineRadio3">OKdoller</label>
+							<input class="form-check-input" type="checkbox" name="payment" id="payment_type3" value="okdoller">
+							<label class="form-check-label" for="payment_type3">OKdoller</label>
 						</div>
 					</div>
 					<div class="form-group d-flex algin-items-center justify-content-between mt-4 mb-0">
