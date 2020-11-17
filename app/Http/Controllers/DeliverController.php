@@ -45,15 +45,15 @@ class DeliverController extends Controller
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:8|confirmed',
             'photo' => 'required|mimes:jpeg,jpg,png',
-            'birthday' => 'date_format:Y-M-D|before:today',
+            'dob' => 'date_format:Y-M-D|before:today',
             'gender' =>'required',
             'phone' => 'required|regex:/^([0-9\s\-\+\(\)]*)$/|min:10',
             'address' => 'required',
-            'job_type' => 'required',
-            'job_day' => 'required',
-            'job_time' => 'required',
-            'transport_type' => 'required',
-            'payment_type' => 'required',
+            'time' => 'required',
+            // 'job' => 'required',
+            // 'job_day' => 'required',
+            // 'transport_type' => 'required',
+            // 'payment_type' => 'required',
             
         ]);
 
@@ -139,15 +139,15 @@ class DeliverController extends Controller
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:8|confirmed',
             'photo' => 'required|mimes:jpeg,jpg,png',
-            'birthday' => 'date_format:Y-M-D|before:today',
+            'dob' => 'date_format:Y-M-D|before:today',
             'gender' =>'required',
             'phone' => 'required|regex:/^([0-9\s\-\+\(\)]*)$/|min:10',
             'address' => 'required',
-            'job_type' => 'required',
-            'job_day' => 'required',
-            'job_time' => 'required',
-            'transport_type' => 'required',
-            'payment_type' => 'required',
+            'time' => 'required',
+            // 'job' => 'required',
+            // 'job_day' => 'required',
+            // 'transport_type' => 'required',
+            // 'payment_type' => 'required',
             
         ]);
         // If include file, upload

@@ -70,6 +70,8 @@ Route::get('/', 'FrontendController@index')->name('main');
 
 Route::get('frontendlogin', 'FrontendController@login')->name('frontend.login');
 
+Route::get('frontendlogout', 'FrontendController@logout')->name('frontend.logout');
+
 Route::get('customerregister', 'FrontendController@customerregister')->name('frontend.customerregister');
 
 Route::get('deliverregister', 'FrontendController@deliverregister')->name('frontend.deliverregister');
@@ -77,6 +79,12 @@ Route::get('deliverregister', 'FrontendController@deliverregister')->name('front
 Route::post('customerstore', 'FrontendController@customerstore')->name('frontend.customerstore');
 
 Route::post('deliverstore', 'FrontendController@deliverstore')->name('frontend.deliverstore');
+
+Route::get('customerorder', 'FrontendController@order')->name('frontend.order');
+
+Route::post('orderstore', 'FrontendController@orderstore')->name('orderstore');
+
+Route::post('addway', 'FrontendController@addway')->name('addway');
 
 
 

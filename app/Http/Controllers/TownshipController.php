@@ -51,7 +51,7 @@ class TownshipController extends Controller
         $township->price= $request->price;
         $township->save();
 
-         return redirect()->route('township.index');
+        return redirect()->route('township.index');
 
     }
 
