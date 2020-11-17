@@ -12,17 +12,21 @@
 			<div class="col-8">
 				<form method="post" action="{{route('frontend.deliverstore')}}" enctype="multipart/form-data">
 					@csrf
-					<div class="form-group">
-						<label>Photo</label>
-						<input type="file" name="photo" class="form-control-file @error('photo') is-invalid @enderror">
-						@error('photo')
-						<span class="invalid-feedback" role="alert"><strong>{{$message}}</strong></span>
-						@enderror
-					</div>
+					<div class="form-group row">
+						<label for="photo_id" > Photo <small class="text-danger"> (* jpeg | jpg | png) </small></label>
+						<div class="col-sm-10">
+							<input type="file" id="photo_id" name="photo"  class="form-control-file @error('photo') is-invalid @enderror" value="{{old('photo')}}">
+							@error('photo')
+							<span class="invalid-feedback" role="alert">
+								<strong>{{ $message }}</strong>
+							</span>
+							@enderror
+						</div>
+					</div>  
 
 					<div class="form-group">
 						<label>Name:</label>
-						<input type="text" name="name" class="form-control @error('name') is-invalid @enderror" value="">
+						<input type="text" name="name" class="form-control @error('name') is-invalid @enderror" value="{{old('name')}}">
 						@error('name')
 						<span class="invalid-feedback" role="alert">
 							<strong>{{ $message }}</strong>
@@ -60,25 +64,39 @@
 					</div>
 
 					<div class="form-group">
-						<label>Date of Birth:</label>
-						<input type="date" name="form" class="form-control" id="fromDate" value="">
+						<label for="birthday">Date of Birth:</label>
+						<input id="birthday" type="date" name="form" class="form-control  @error('birthday') is-invalid @enderror"  value="{{ old('form') }}" required>
+
+						@error('birthday')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
 					</div>
 
 					<div class="form-group">
-						<label class="mr-5">Gender:</label>
-						<div class="form-check form-check-inline">
-							<input class="form-check-input" type="radio" name="gender" id="inlineRadio1" value="male">
-							<label class="form-check-label" for="inlineRadio1">Male</label>
-						</div>
-						<div class="form-check form-check-inline">
-							<input class="form-check-input" type="radio" name="gender" id="inlineRadio2" value="female">
-							<label class="form-check-label" for="inlineRadio2">Female</label>
-						</div>               
+						<div id="gender-group" class="form-group{{ $errors->has('gender') ? ' has-error' : '' }}">
+							<label class="mr-5">Gender:</label>
+							<div class="form-check form-check-inline">
+								<input class="form-check-input" type="radio" name="gender" id="male"  value="Male" required autocomplete="gender" > {{ (old('sex') == 'male') ? 'checked' : '' }}
+								<label class="form-check-label" for="male">Male</label>
+							</div>
+							<div class="form-check form-check-inline">
+								<input class="form-check-input" type="radio" name="gender" id="female" value="Female" required autocomplete="gender" > {{ (old('sex') == 'female') ? 'checked' : '' }}
+								<label class="form-check-label" for="female">Female</label>
+							</div>
+							 @error('gender')
+                                <span class="help-block">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+						</div>              
 					</div>
 
-					<div class="form-group">
-						<label>Phone no:</label>
-						<input type="text" name="phone" class="form-control @error('phone') is-invalid @enderror" value="">
+					<div class="form-group row">
+						<label for="phone" >Phone</label>
+							<input id="phone" type="text" class="form-control @error('phone') is-invalid @enderror" name="phone" value="{{ old('phone') }}" required>
+						
 						@error('phone')
 						<span class="invalid-feedback" role="alert">
 							<strong>{{ $message }}</strong>
@@ -86,9 +104,11 @@
 						@enderror
 					</div>
 
-					<div class="form-group">
-						<label>Address:</label>
-						<textarea class="form-control @error('address') is-invalid @enderror" name="address" ></textarea>
+					<div class="form-group row">
+						<label for="address" >Address</label>
+
+							<textarea id="address" class="form-control @error('address') is-invalid @enderror" name="address" required>{{ old('address') }}</textarea> 
+						
 						@error('address')
 						<span class="invalid-feedback" role="alert">
 							<strong>{{ $message }}</strong>
@@ -96,92 +116,104 @@
 						@enderror
 					</div>
 
+
 					<div class="form-group">
-						<label class="mr-5 pr-5">Job_type:</label>
-						<div class="form-check form-check-inline">
-							<input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="fulltime" name="job">
-							<label class="form-check-label" for="inlineCheckbox1">Full Time</label>
-						</div>
-						<div class="form-check form-check-inline">
-							<input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="parttime" name="job">
-							<label class="form-check-label" for="inlineCheckbox2">Part Time</label>
-						</div>
+						
+						<label class="mr-5 pr-5">Job Type</label>
+							<div class="form-check form-check-inline">
+								<input class="form-check-input" type="radio" id="fulltime" name="job" value="fulltime" required>
+								<label class="form-check-label" for="fulltime">Full Time</label>
+							</div>
+							<div class="form-check form-check-inline">
+								<input class="form-check-input" type="radio" id="parttime" name="job" value="parttime" required> 
+								<label class="form-check-label" for="parttime">Part Time</label>
+							</div>
 					</div>
 
 					<div class="form-group">
-						<label class="mr-5 pr-5">Job_day:</label>
+						<label class="mr-5 pr-5">Job Day</label>
 						<div class="form-check form-check-inline">  					
-							<input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="monday" name="day">
+							<input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="monday" name="day"  >
 							<label class="form-check-label" for="inlineCheckbox1">Monday</label>
 						</div>
 						<div class="form-check form-check-inline"> 					
-							<input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="tuesday" name="day">
+							<input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="tuesday" name="day" >
 							<label class="form-check-label" for="inlineCheckbox2">Tuesday</label>
 						</div>
 						<div class="form-check form-check-inline">
-							<input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="wednesday" name="day">
+							<input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="wednesday" name="day" >
 							<label class="form-check-label" for="inlineCheckbox3">Wednesday</label>
 						</div>
 						<div class="form-check form-check-inline">  					
-							<input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="thursday" name="day">
+							<input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="thursday" name="day" >
 							<label class="form-check-label" for="inlineCheckbox1">Thursday</label>
 						</div>
 						<div class="form-check form-check-inline">  					
-							<input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="friday" name="day">
+							<input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="friday" name="day" >
 							<label class="form-check-label" for="inlineCheckbox2">Friday</label>
 						</div>
 						<div class="form-check form-check-inline">
-							<input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="saturday" name="day">
+							<input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="saturday" name="day" >
 							<label class="form-check-label" for="inlineCheckbox3">Saturday</label>
 						</div>
 						<div class="form-check form-check-inline">
-							<input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="sunday" name="day">
+							<input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="sunday" name="day" >
 							<label class="form-check-label" for="inlineCheckbox3">Sunday</label>
 						</div>
 					</div>
 
 					<div class="form-group row">
-						<label class=" mr-4 mt-4 ml-3 pr-5" >Job Time:</label>
+						<label class=" mr-4 mt-4 ml-3 pr-5" >Job Time</label>
 
 						<div class="col-md-3">
 							<div class="form-group date">
 								<label for="start_time">Start Time</label>
-								<input type="time" name="time" class="form-control" id="start_time">
+								<input id="start_time" type="time" name="time" class="form-control @error('time') is-invalid @enderror"  value="{{ old('time') }}" id="start_time" required autocomplete="start_time" autofocus  required>
+								@error('time')
+                            	<span class="invalid-feedback" role="alert">
+                                	<strong>{{ $message }}</strong>
+                            	</span>
+                        		@enderror
 							</div>
 						</div>
 						<div class="col-md-3">
 							<div class="form-group date">
 								<label for="end_time">End Time</label>
-								<input type="time" name="time" class="form-control" id="end_time">
+								<input id="end_time" type="time" name="time" class="form-control @error('time') is-invalid @enderror"  value="{{ old('time') }}" id="end_time" required autocomplete="end_time" autofocus required>
+								@error('time')
+                            	<span class="invalid-feedback" role="alert">
+                                	<strong>{{ $message }}</strong>
+                            	</span>
+                        		@enderror
 							</div>
 						</div>
 					</div>
 
 					<div class="form-group">
-						<label class="mr-5">Transport_type:</label>
+						<label class="mr-5">Trasport Type</label>
 						<div class="form-check form-check-inline">  					
-							<input class="form-check-input" type="radio" name="transport" id="inlineRadio1" value="car">
+							<input class="form-check-input" type="radio" name="transport" id="inlineRadio1" value="car" required>
 							<label class="form-check-label" for="inlineRadio1">Car</label>
 						</div>
 						<div class="form-check form-check-inline"> 					
-							<input class="form-check-input" type="radio" name="transport" id="inlineRadio2" value="bicycle">
+							<input class="form-check-input" type="radio" name="transport" id="inlineRadio2" value="bicycle" required>
 							<label class="form-check-label" for="inlineRadio2">Bicycle</label>
 						</div>
 					</div>
 
 					<div class="form-group">
-						<label class="mr-5">Payment_type:</label>
+						<label class="mr-5">Payment Type</label>
 						<div class="form-check form-check-inline">	
-							<input class="form-check-input" type="radio" name="payment" id="inlineRadio1" value="kbz">
-							<label class="form-check-label" for="inlineRadio1">KBZpay</label>
+							<input class="form-check-input" type="checkbox" name="payment" id="payment_type1" value="kbz">
+							<label class="form-check-label" for="payment_type1">KBZpay</label>
 						</div>
 						<div class="form-check form-check-inline">  				
-							<input class="form-check-input" type="radio" name="payment" id="inlineRadio2" value="wave">
-							<label class="form-check-label" for="inlineRadio2">WaveMoney</label>
+							<input class="form-check-input" type="checkbox" name="payment" id="payment_type2" value="wave"  >
+							<label class="form-check-label" for="payment_type2">WaveMoney</label>
 						</div>
 						<div class="form-check form-check-inline">  				
-							<input class="form-check-input" type="radio" name="payment" id="inlineRadio3" value="okdoller">
-							<label class="form-check-label" for="inlineRadio3">OKdoller</label>
+							<input class="form-check-input" type="checkbox" name="payment" id="payment_type3" value="okdoller"  >
+							<label class="form-check-label" for="payment_type3">OKdoller</label>
 						</div>
 					</div>
 					<div class="form-group d-flex algin-items-center justify-content-between mt-4 mb-0">

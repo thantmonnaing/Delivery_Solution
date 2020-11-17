@@ -77,10 +77,21 @@ class FrontendController extends Controller
 
 	public function deliverstore(Request $request)
 	{
+        //dd($request);
 		$request-> validate([
             "name" => "required|min:5",
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:8|confirmed',
+            'photo' => 'required|mimes:jpeg,jpg,png',
+            'dob' => 'date_format:Y-M-D|before:today',
+            'gender' =>'required',
+            'phone' => 'required|regex:/^([0-9\s\-\+\(\)]*)$/|min:10',
+            'address' => 'required',
+            'time' => 'required',
+            //'job' => 'required',
+            // 'job_day' => 'required',
+            // 'transport_type' => 'required',
+            //'payment' => 'required',
             
         ]);
 
@@ -114,6 +125,7 @@ class FrontendController extends Controller
         $deliver->payment_type= $request->payment;
         $deliver->status=0;
         $deliver->save();
+
 
         $user->assignRole('deliver');
 

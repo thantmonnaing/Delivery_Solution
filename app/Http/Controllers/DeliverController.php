@@ -40,10 +40,20 @@ class DeliverController extends Controller
     public function store(Request $request)
     {   
         //dd($request);
-         $request-> validate([
+        $request-> validate([
             "name" => "required|min:5",
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:8|confirmed',
+            'photo' => 'required|mimes:jpeg,jpg,png',
+            'dob' => 'date_format:Y-M-D|before:today',
+            'gender' =>'required',
+            'phone' => 'required|regex:/^([0-9\s\-\+\(\)]*)$/|min:10',
+            'address' => 'required',
+            'time' => 'required',
+            // 'job' => 'required',
+            // 'job_day' => 'required',
+            // 'transport_type' => 'required',
+            // 'payment_type' => 'required',
             
         ]);
 
@@ -128,9 +138,18 @@ class DeliverController extends Controller
             "name" => "required|min:5",
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:8|confirmed',
+            'photo' => 'required|mimes:jpeg,jpg,png',
+            'dob' => 'date_format:Y-M-D|before:today',
+            'gender' =>'required',
+            'phone' => 'required|regex:/^([0-9\s\-\+\(\)]*)$/|min:10',
+            'address' => 'required',
+            'time' => 'required',
+            // 'job' => 'required',
+            // 'job_day' => 'required',
+            // 'transport_type' => 'required',
+            // 'payment_type' => 'required',
             
         ]);
-
         // If include file, upload
         if($request->file()) {
             $fileName = time().'_'.$request->photo->getClientOriginalName();
