@@ -3,6 +3,7 @@
 use Illuminate\Database\Seeder;
 //use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Role;
+use App\User;
 
 class RoleTableSeeder extends Seeder
 {
@@ -23,6 +24,14 @@ class RoleTableSeeder extends Seeder
 
         $role3=new Role;
         $role3->name="customer";
-        $role3->save();        
+        $role3->save();   
+
+        $user = new User;
+        $user->name = 'admin';
+        $user->email = 'admin@gmail.com';
+        $user->password = Hash::make('123456789');
+        $user->save();
+
+        $user->assignRole('admin');     
     }
 }

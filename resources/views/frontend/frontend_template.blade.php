@@ -7,6 +7,7 @@
       <!-- mobile metas -->
       <meta name="viewport" content="width=device-width, initial-scale=1">
       <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+      <meta name="csrf-token" content="{{ csrf_token() }}">
       <!-- site metas -->
       <title>Delivery Solution</title>
       <meta name="keywords" content="">
@@ -22,6 +23,8 @@
       <link rel="icon" href="{{asset('frontend_asset/images/fevicon.png')}}" type="image/gif" />
       <!-- Scrollbar Custom CSS -->
       <link rel="stylesheet" href="{{asset('frontend_asset/css/jquery.mCustomScrollbar.min.css')}}">
+
+      <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
       <!-- Tweaks for older IEs-->
       <!-- owl stylesheets --> 
       <link rel="stylesheet" href="{{asset('frontend_asset/css/owl.carousel.min.css')}}">
@@ -61,7 +64,7 @@
                   <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col logo_section">
                      <div class="full mt-0">
                         <div class="center-desk">
-                           <div class="logo"><a href=""><img src="{{asset('frontend_asset/images/logo.png')}}" alt="#" style="width: 100px;"> <span style="font-size: 20px;">Delivery Solution</span></a> </div>
+                           <div class="logo"><a href="{{route('main')}}"><img src="{{asset('frontend_asset/images/logo.png')}}" alt="#" style="width: 100px;"> <span style="font-size: 20px;color:#fff;">Delivery Solution</span></a> </div>
                         </div>
                      </div>
                   </div>
@@ -70,19 +73,31 @@
                         <div class="limit-box">
                            <nav class="main-menu">
                               <ul class="menu-area-main">
-                                 <li class="active"> <a href="#">Home</a> </li>
+                                 <li class="active"> <a href="{{route('main')}}">Home</a> </li>
                                  <li>
-                                    <div class="nav-item dropdown">
+                                    @if(Auth::check())
+                                    @role('customer')
+                                       <a href="{{route('frontend.order')}}">Order</a>
+                                    @endrole   
+                                    @else
+                                       <div class="nav-item dropdown">
                                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Register</a>
                                        <div class="dropdown-menu">
                                           <a href="{{route('frontend.customerregister')}}" class="dropdown-item">Customer</a>
                                           <a href="{{route('frontend.deliverregister')}}" class="dropdown-item">Deliver</a>
                                        </div>
                                     </div>
+                                    @endif
                                  </li>
                                  <li>
                                  @if(Auth::check())
-                                    <a href="#">{{ Auth::user()->name }}</a>
+                                    <div class="nav-item dropdown">
+                                       <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">{{ Auth::user()->name }}</a>
+                                       <div class="dropdown-menu">
+                                          <a href="{{route('frontend.customerregister')}}" class="dropdown-item">Profile</a>
+                                          <a href="{{route('frontend.logout')}}" class="dropdown-item">Logout</a>
+                                       </div>
+                                    </div>
                                  @else                                 
                                     <a href="{{route('frontend.login')}}">Login
                                     </a>                                 
@@ -368,28 +383,7 @@
       <script src="{{asset('frontend_asset/js/custom.js')}}"></script>
       <!-- javascript --> 
       <script src="{{asset('frontend_asset/js/owl.carousel.js')}}"></script>
-      @yield('script')
-      <script>
-         $(document).ready(function() {
-           var owl = $('.owl-carousel');
-           owl.owlCarousel({
-             margin: 10,
-             nav: true,
-             loop: true,
-             responsive: {
-               0: {
-                 items: 1
-               },
-               600: {
-                 items: 2
-               },
-               1000: {
-                 items: 3
-               }
-             }
-           })
-         })
-      </script>
+      @yield('script')     
      
    </body>
 </html>

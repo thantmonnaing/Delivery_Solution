@@ -8,12 +8,16 @@ use Illuminate\Support\Facades\Auth;
 use App\Customer;
 use App\User;
 use App\Deliver;
+use App\Township;
+use App\Order;
+use App\Way;
 
 class FrontendController extends Controller
 {
     public function index($value='')
 	{
-		return view('frontend.main');
+        $townships = Township::all();
+		return view('frontend.main',compact('townships'));
 	}
 
 	public function login($value='')
@@ -68,7 +72,7 @@ class FrontendController extends Controller
 
         $user->assignRole('customer');
 
-		return view('frontend.main');
+		return redirect()->route('main');
 	}
 
 	public function deliverstore(Request $request)
@@ -114,6 +118,70 @@ class FrontendController extends Controller
         $user->assignRole('deliver');
 
         // Auth::login($user);
-		return view('frontend.main');
+		return redirect()->route('main');
 	}
+
+    public function logout($value='')
+    {
+        Auth::logout();
+        return view('frontend.main');
+    }
+
+    public function order($value='')
+    {        
+        $townships = Township::all();
+        return view('frontend.order',compact('townships'));
+    }
+
+    public function orderstore(Request $request)
+    {     
+        // dd($request);
+        $myways = json_decode($request->way);
+        $notes = $request->notes;
+        $payment = $request->payment;
+        $orderdate = date('Y-m-d');
+
+        foreach ($myways as $row) { 
+            $way = new Way;
+            $way->item_name = $row->item_name;
+            $way->township_id = $row->township_id;
+            $way->address = $row->receiver_address;
+            $way->phone = $row->receiver_phone;
+            $way->item_weight = $row->item_weight;
+            $way->receiver_name = $row->receiver_name;
+            $way->save();
+        }
+
+        $customer = Customer::where('user_id',Auth::user()->id)->get();
+        $order = new Order;
+        $order->order_no = uniqid();
+        $order->order_date = $orderdate;
+        foreach ($customer as $row) { 
+            $order->customer_id =  $row->id;
+        }               
+        $order->payment_type = $payment;
+        $order->status = 0;
+        $order->notes = $notes;// current logined user_id
+        $order->save();
+
+        $ways = Way::all();
+        foreach ($ways as $row) { 
+            $township = Township::where('id',$row->township_id)->get();
+            foreach ($township as $t_row) { 
+                $order->ways()->attach($row->id,['total_amount'=>$t_row->price]);
+            }            
+        }
+
+        // ajax response
+        return response()
+            ->json(['msg' => 'Successful You Order!']);
+        
+    }
+
+    public function addway(Request $request){
+
+        $id = $request->township;
+        $township = Township::where('id',$id)->get();
+        return $township;
+    }
 }
