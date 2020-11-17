@@ -81,3 +81,9 @@ Route::post('deliverstore', 'FrontendController@deliverstore')->name('frontend.d
 
 
 
+
+
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
