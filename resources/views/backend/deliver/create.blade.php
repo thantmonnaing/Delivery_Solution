@@ -172,6 +172,7 @@
 						</div>
 					</div>
 
+					
 					<div class="form-group">
 						<label class="mr-5">Payment_type:</label>
 						<div class="form-check form-check-inline">	

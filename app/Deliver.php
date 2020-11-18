@@ -15,4 +15,9 @@ class Deliver extends Model
     	return $this->belongsTo('App\User');
 
     }
+
+    public function townships(){
+    	return $this->belongsToMany('App\Township','delivertownships', 'townships_id', 'delivers_id');
+    			    
+    }
 }

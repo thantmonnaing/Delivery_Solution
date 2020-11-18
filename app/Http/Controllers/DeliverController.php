@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\User;
 use App\Deliver;
+//use App\Township;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
@@ -28,6 +29,8 @@ class DeliverController extends Controller
      */
     public function create()
     {
+        // $townships=Township::all();
+        // return view('backend.deliver.create',compact('townships'));
         return view('backend.deliver.create');
     }
 

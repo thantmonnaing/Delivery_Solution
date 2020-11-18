@@ -202,6 +202,22 @@
 					</div>
 
 					<div class="form-group">
+						<label class="">Location</label>
+						<select multiple="true" name="township[]" size="5" class="custom-select @error('township') is-invalid @enderror receiver_township" id="township_id" name="township">
+							<option selected hidden value="">Choose Township</option>
+								@foreach($townships as $row)
+								<option value="{{$row->id}}" selected="">{{$row->name}}</option>
+								@endforeach
+							</select>
+							@error('township')
+							<span class="invalid-feedback" role="alert">
+								<strong>{{ $message }}</strong>
+							</span>
+							@enderror
+						</select>
+					</div>
+
+					<div class="form-group">
 						<label class="mr-5">Payment Type</label>
 						<div class="form-check form-check-inline">	
 							<input class="form-check-input" type="checkbox" name="payment" id="payment_type1" value="kbz">

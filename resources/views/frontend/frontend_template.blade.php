@@ -94,7 +94,7 @@
                                     <div class="nav-item dropdown">
                                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">{{ Auth::user()->name }}</a>
                                        <div class="dropdown-menu">
-                                          <a href="{{route('frontend.customerregister')}}" class="dropdown-item">Profile</a>
+                                          <a href="{{route('frontend.profile')}}" class="dropdown-item">Profile</a>
                                           <a href="{{route('frontend.logout')}}" class="dropdown-item">Logout</a>
                                        </div>
                                     </div>

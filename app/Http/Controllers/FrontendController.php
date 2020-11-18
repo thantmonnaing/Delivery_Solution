@@ -31,8 +31,10 @@ class FrontendController extends Controller
 	}
 
 	public function deliverregister($value='')
-	{
-		return view('frontend.deliver_register');
+	{  
+        $townships=Township::all();
+		return view('frontend.deliver_register',compact('townships'));
+        //return view('frontend.deliver_register');
 	}
 
 	public function customerstore(Request $request)
@@ -75,9 +77,15 @@ class FrontendController extends Controller
 		return redirect()->route('main');
 	}
 
+     public function edit(Customer $customer)
+    {   
+        $user=User::all();
+        return view('frontend.profile',compact('customer','user'));
+    }
+
 	public function deliverstore(Request $request)
 	{
-        //dd($request);
+        dd($request);
 		$request-> validate([
             "name" => "required|min:5",
             'email' => 'required|string|email|max:255|unique:users',
@@ -125,6 +133,9 @@ class FrontendController extends Controller
         $deliver->payment_type= $request->payment;
         $deliver->status=0;
         $deliver->save();
+
+        $deliver=Deliver::find($deliver_id);
+        $deliver->townships()->attach($township_id);
 
 
         $user->assignRole('deliver');

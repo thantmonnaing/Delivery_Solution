@@ -86,6 +86,8 @@ Route::post('orderstore', 'FrontendController@orderstore')->name('orderstore');
 
 Route::post('addway', 'FrontendController@addway')->name('addway');
 
+Route::get('profile','FrontendController@edit')->name('frontend.profile');
+
 
 
 
