@@ -121,7 +121,8 @@ class DeliverController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit(Deliver $deliver)
-    {
+    {   
+        //dd($deliver);
         $user=User::all();
         return view('backend.deliver.edit',compact('deliver','user'));
     }

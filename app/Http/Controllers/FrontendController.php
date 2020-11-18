@@ -211,6 +211,83 @@ class FrontendController extends Controller
 		return redirect()->route('main');
 	}
 
+    public function deliveredit()
+    {   
+
+        $user = Auth::user();
+        //dd($user);
+        //$deliver = $user->deliver;
+        $deliver=Deliver::find($user->id);
+        //$deliver=Deliver::where('user_id',$id)->get();
+        //dd($deliver);
+        return view('frontend.deliverprofile',compact('deliver','user'));
+       
+    }
+
+    public function deliverupdate(Request $request,Deliver $deliver)
+    {
+        //dd($request);
+
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255',
+            'photo' => 'sometimes|required|mimes:jpeg,jpg,png',
+            'phone' => 'required|regex:/^([0-9\s\-\+\(\)]*)$/|min:10',
+            'address' => 'required',
+            'dob' => 'date_format:Y-M-D|before:today',
+            'oldphoto'=> 'required',
+            'time' => 'required',
+            'user_id'=> 'required',
+            'status'=> 'required',
+        ]);
+
+        if($request->file()){
+
+            if(file_exists(public_path($request->oldphoto))){
+                unlink(public_path($request->oldphoto));
+            }              
+
+            $filename = time().'_'.$request->photo->getClientOriginalName();
+            $filepath = $request->file('photo')->storeAS('customerimg', $filename, 'public');
+
+            $path = '/storage/'.$filepath;
+        }else{
+            $path = $request->oldphoto;
+        }
+
+        $user = User::find($request->user_id);
+        //dd($user);
+        $user->name = $request->name;
+        //dd($user->name);
+        $user->email = $request->email;
+        //dd($user->email);
+        $user->save();
+        //dd($user);
+        
+        
+        $deliver->user_id = $request->user_id;
+        //dd($deliver->user_id);
+        $deliver->profile = $path;
+        $deliver->phone = $request->phone;
+        $deliver->address = $request->address;
+        $deliver->dob = $request->form;
+        $deliver->gender = $request->gender;
+        $deliver->phone = $request->phone;
+        $deliver->address= $request->address;
+        $deliver->job_type= $request->job;
+        $deliver->job_day= $request->day;
+        $deliver->job_time= $request->time;
+        $deliver->transport_type = $request->transport;
+        $deliver->payment_type= $request->payment;
+        //$deliver->status = $request->status;
+        
+        $deliver->save();
+        //dd($deliver);
+
+        return redirect()->route('main');
+        
+    }
+
     public function logout($value='')
     {
         Auth::logout();

@@ -94,7 +94,14 @@
                                     <div class="nav-item dropdown">
                                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">{{ Auth::user()->name }}</a>
                                        <div class="dropdown-menu">
+                                          
+                                          @if(Auth::user()->hasRole('customer'))
                                           <a href="{{route('frontend.profile')}}" class="dropdown-item">Profile</a>
+                                          @else
+                                          
+                                          <a href="{{route('frontend.deliverprofile')}}" class="dropdown-item">Profile</a>
+                                          @endif
+
                                           <a href="{{route('frontend.logout')}}" class="dropdown-item">Logout</a>
                                        </div>
                                     </div>
