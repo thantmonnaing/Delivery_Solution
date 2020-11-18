@@ -15,7 +15,7 @@
                           <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Pending</a>
                       </li>
                       <li class="nav-item" role="presentation">
-                          <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Confirm</a>
+                          <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Confirm & Pair</a>
                       </li>
                     </ul>
                     <div class="tab-content mt-3" id="myTabContent">
@@ -25,7 +25,7 @@
                                     <tr>
                                         <th>No</th>
                                         <th>Orderno</th>
-                                        <th>Orderdate</th>                                        
+                                        <th>Orderdate</th>                             
                                         <th>Customer Name</th>
                                         <th>Totalamount</th>
                                         <th>Actions</th>
@@ -35,17 +35,19 @@
                                     @php 
                                     $i=1;
                                     @endphp
-                                    @foreach($orders as $row)                                       
+                                    @foreach($order_pending as $row)                                       
                                         <tr>
                                             <td>{{$i++}}</td>
                                             <td>{{$row->order_no}}</td>
                                             <td>{{$row->order_date}}</td>
                                             <td>{{$row->customer->user->name}}</td>
-                                            
-                                            @foreach($row->ways as $r)
-                                                   <td>{{$r->pivot->total_amount}}</td>
+                                            @php 
+                                                $total = 0;
+                                            @endphp
+                                            @foreach($row->ways as $w_row)
+                                                   @php $total+= $w_row->pivot->total_amount; @endphp
                                             @endforeach
-
+                                            <td>{{$total}}</td>
                                             <td>
                                                 <a href="{{route('order.show',$row->id)}}" class="btn btn-primary">Detail</a>
                                                 <form method="post" action="{{route('order.destroy',$row->id)}}" onsubmit="return confirm('Are you sure to Delete?')" class="d-inline-block">
@@ -65,33 +67,36 @@
                                     <tr>
                                         <th>No</th>
                                         <th>Orderno</th>
-                                        <th>Orderdate</th>
-                                        <th>Total Amount</th>
+                                        <th>Confirm date</th>
                                         <th>Customer Name</th>
-                                        <th>Actions</th>
+                                        <th>Deliver Name</th>
+                                        <th>Total</th>
+                                        <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @php 
                                     $i=1;
                                     @endphp
-                                    @foreach($orders as $row)
+                                    @foreach($order_confirm as $row)
                                         <tr>
                                             <td>{{$i++}}</td>
-                                            <td>{{$row->orderno}}</td>
-                                            <td>
-                                              {{$row->orderdate}}
-                                            </td>                                            
-                                            <td></td>
-                                            <td>{{number_format($row->total_amount)}}</td>
-                                            <td>
-                                                <a href="{{route('order.show',$row->id)}}" class="btn btn-primary">Detail</a>
-                                                <form method="post" action="{{route('order.destroy',$row->id)}}" onsubmit="return confirm('Are you sure to Delete?')" class="d-inline-block">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <input type="submit" name="btnsubmit" value="Delete" class="btn btn-danger">                                    
-                                                </form>
-                                            </td>
+                                            <td>{{$row->order_no}}</td>
+                                            @foreach($row->delivers as $del)
+                                                    <td>{{$del->pivot->date}}</td>
+                                                    <td>{{$row->customer->user->name}}</td>
+                                                    <td>
+                                                      {{$del->user->name}}
+                                                    </td>    
+                                            @endforeach                                      
+                                            @php 
+                                                $total = 0;
+                                            @endphp
+                                            @foreach($row->ways as $w_row)
+                                                   @php $total+= $w_row->pivot->total_amount; @endphp
+                                            @endforeach
+                                            <td>{{$total}}</td>
+                                            <td><a href="#" class="btn btn-primary">Process</a></td>
                                         </tr>
                                     @endforeach
                                 </tbody>

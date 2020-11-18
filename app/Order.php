@@ -17,6 +17,13 @@ class Order extends Model
 
     }
 
+    public function delivers(){
+        return $this->belongsToMany('App\Deliver','pairs')
+                    ->withPivot('date','status')
+                    ->withTimestamps();
+
+    }
+
     public function customer()
     {
     	return $this->belongsTo('App\Customer');

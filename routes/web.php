@@ -57,6 +57,10 @@ Route::resource('order','OrderController');
 
 Route::post('getdeliver', 'OrderController@getdeliver')->name('getdeliver');
 
+Route::post('confirm', 'OrderController@confirm')->name('order.confirm');
+
+Route::get('pair', 'OrderController@pair')->name('pair.index');
+
 
 Route::get('signup', 'BackendController@signup')->name('signup');
 

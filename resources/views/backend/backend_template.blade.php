@@ -92,12 +92,6 @@
         </div>
       </div>
       <ul class="app-menu">
-        <li>
-          <a class="app-menu__item" href="{{route('backend')}}">
-            <i class="app-menu__icon fa fa-dashboard"></i>
-            <span class="app-menu__label">Dashboard</span>
-          </a>
-        </li>
         <li class="treeview">
           <a class="app-menu__item {{Request::is('customer*') ? 'active' : ''}}" href="{{route('customer.index')}}">
             <i class="app-menu__icon fa fa-laptop"></i>
@@ -115,13 +109,7 @@
             <i class="app-menu__icon fa fa-laptop"></i>
             <span class="app-menu__label">Order</span>
           </a>
-        </li>
-        <li class="treeview">
-          <a class="app-menu__item {{Request::is('pair*') ? 'active' : ''}}" href="{{route('backend')}}">
-            <i class="app-menu__icon fa fa-laptop"></i>
-            <span class="app-menu__label">Pair</span>
-          </a>
-        </li>        
+        </li>       
         <li class="treeview">
           <a class="app-menu__item {{Request::is('township*') ? 'active' : ''}}" href="{{route('township.index')}}">
             <i class="app-menu__icon fa fa-laptop"></i>

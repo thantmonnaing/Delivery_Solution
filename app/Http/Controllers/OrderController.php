@@ -16,7 +16,9 @@ class OrderController extends Controller
     public function index()
     {
         $orders = Order::all();
-        return view('backend.order.index',compact('orders'));
+        $order_pending = Order::where('status',0)->get();
+        $order_confirm = Order::where('status',1)->get();
+        return view('backend.order.index',compact('order_pending','order_confirm'));
     }
 
     /**
@@ -37,7 +39,7 @@ class OrderController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        
     }
 
     /**
@@ -91,7 +93,25 @@ class OrderController extends Controller
     {
         $deliver_id = $request->deliver_id;
         $deliver = Deliver::find($deliver_id);
+        $user = $deliver->user;
 
-        return $deliver;
+        return response()
+            ->json(['deliver' => $deliver]);
+    }
+
+    public function confirm(Request $request)
+    {
+        // dd($request);
+
+        Order::where('id', $request->order_id)
+                  ->update(['status' => 1]);
+                  
+        $deliver_id = $request->deliver_id;
+        $order = Order::find($request->order_id);
+
+        $order->delivers()->attach($deliver_id,['date'=>date('Y-m-d'),'status'=>0]);
+
+        return response()
+            ->json(['msg' => "Successful pair order and deliver!"]);
     }
 }

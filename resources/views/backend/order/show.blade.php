@@ -24,42 +24,48 @@
                             </h6>
                         </div>
                         <div class="col-7">
-                            <div class="row">
-                                <div class="col-md-8 col-sm-8 col-lg-8">
-                                    <div class="form-group">
-                                        <div class="col-sm-12">
-                                            <select class="custom-select @error('deliver') is-invalid @enderror get_deliver" id="deliver" name="deliver">
-                                                <option selected hidden value="">Choose Deliver</option>
-                                                @foreach($delivers as $row)
-                                                <option value={{$row->id}}>{{$row->user->name}}</option>
-                                                @endforeach
-                                            </select>
-                                            @error('deliver')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                            @enderror
+                            <form method="" action="" class="confirmform">
+                                <div class="row">
+                                    <div class="col-md-8 col-sm-8 col-lg-8">
+
+                                        <div class="form-group">
+                                            <div class="col-sm-12 pt-3">
+                                                <select class="custom-select @error('deliver') is-invalid @enderror get_deliver" id="deliver" name="deliver">
+                                                    <option selected hidden value="">Choose Deliver</option>
+                                                    @foreach($delivers as $row)
+                                                    <option value={{$row->id}}>{{$row->user->name}}</option>
+                                                    @endforeach
+                                                </select>
+                                                @error('deliver')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                                @enderror
+                                                <input type="hidden" name="id" id="order_id" value="{{$order->id}}">                                          
+                                            </div>
                                         </div>
+
+                                    </div>
+
+                                    <div class="col-md-4 col-sm-4 col-lg-4 pt-3">
+                                        <button type="submit" class="btn btn-primary mainfullbtncolor">Confirm</button>
                                     </div>
                                 </div>
-                                <div class="col-md-4 col-sm-4 col-lg-4 text-right">
-                                    <form method="post" action="{{route('order.show',$order->id)}}" class="d-inline-block mb-3">
-                                        @csrf
-                                        <button class="btn btn-success" type="submit">Confirm</button>
-                                    </form><br>
-                                    <a class="btn btn-secondary" href="javascript:window.print();" target="_blank"><i class="fa fa-print"></i> Print</a>
-                                </div>
-                            </div>                            
+                            </form>                             
                         </div>
                     </div>
 
                     <div class="row invoice-info">
-                        <div class="col-4">From:
+                        <div class="col-5">From :
                             <address>
                                 <strong> {{$order->customer->user->name}} 
                             </strong><br>
                             Email: {{$order->customer->user->email}}<br>
-                            Address: {{$order->customer->address}} </address>
+                            Address: {{$order->customer->address}}<br>
+                            Ph : {{$order->customer->phone}} </address>
+                        </div>
+                        <div class="col-7 pl-5">
+                            <span id="deliver_detail"></span>
                         </div>
                     </div>
                     <div class="row">
@@ -113,21 +119,42 @@
                 }
             });
             $('.get_deliver').change(function(){
-                var deliver = $('#deliver').val();
+                var deliver = $('#deliver').val();                
                 var html = '';
                 $.post("{{route('getdeliver')}}", {deliver_id:deliver}, function(response){
-                    console.log(response);  
-                    if(response !=null){
+                    console.log(response); 
+                    var data = response; 
+                    if(data){
+                        
                         html+= `
-                            <address>
-                                <strong> {{$order->customer->user->name}} 
-                            </strong><br>
-                            Email: {{$order->customer->user->email}}<br>
-                            Address: {{$order->customer->address}} </address>
+                            To :<address>
+                                <strong>${data.deliver.user.name}</strong><br>
+                            Email: ${data.deliver.user.email}<br>
+                            Transport : ${data.deliver.transport_type}<br>
+                            Ph : ${data.deliver.phone}
+                             </address>
                         `;
+
+                        $('#deliver_detail').html(html);
                     }
                 })
             });
+
+
+            $('.confirmform').submit(function(e){
+            // alert("click form");
+                var deliver_id = $('#deliver').val();
+                var order_id = $('#order_id').val();
+                if (deliver === "") {
+                    return true;
+                }else{// JSON String
+                    $.post("{{route('order.confirm')}}",{deliver_id:deliver_id,order_id:order_id},function (response) {
+                        // alert(response.msg);
+                        location.href="/order";
+                    })
+                    e.preventDefault();
+                }
+            })
         })  
     </script>    
 @endsection  

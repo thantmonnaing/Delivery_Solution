@@ -16,8 +16,8 @@ class CreatePairsTable extends Migration
         Schema::create('pairs', function (Blueprint $table) {
             $table->id();
             $table->date('date');
-            $table->unsignedBigInteger('customer_order_id');
-            $table->foreign('customer_order_id')
+            $table->unsignedBigInteger('order_id');
+            $table->foreign('order_id')
                   ->references('id')
                   ->on('orders')
                   ->onDelete('cascade');

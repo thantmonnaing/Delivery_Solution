@@ -256,12 +256,14 @@ class FrontendController extends Controller
             $way->receiver_name = $row->receiver_name;
             $way->save();
 
+            $way->price = $row->price;
             array_push($way_arr,$way);
 
         }
+
         foreach ($way_arr as $row) {
-            // dd($row->township->price);
-            $order->ways()->attach($row->id,['total_amount'=>$row->township->price]);          
+
+            $order->ways()->attach($row->id,['total_amount'=>$row->price]);          
         }
 
         // ajax response
