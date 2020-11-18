@@ -86,6 +86,12 @@ Route::post('orderstore', 'FrontendController@orderstore')->name('orderstore');
 
 Route::post('addway', 'FrontendController@addway')->name('addway');
 
+Route::get('about', 'FrontendController@about')->name('about');
 
 
 
+
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
