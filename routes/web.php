@@ -94,14 +94,16 @@ Route::post('addway', 'FrontendController@addway')->name('addway');
 
 Route::get('profile','FrontendController@edit')->name('frontend.profile');
 
-Route::get('about', 'FrontendController@about')->name('about');
-
-
-
 Route::post('customerupdate', 'FrontendController@customerupdate')->name('frontend.customerupdate');
+
+Route::get('deliverprofile','FrontendController@deliveredit')->name('frontend.deliverprofile');
+
+Route::post('deliverupdate', 'FrontendController@deliverupdate')->name('frontend.deliverupdate');
 
 Route::get('about', 'FrontendController@about')->name('about');
 
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('about', 'FrontendController@about')->name('about');
