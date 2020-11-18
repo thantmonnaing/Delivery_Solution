@@ -86,7 +86,7 @@ Route::post('orderstore', 'FrontendController@orderstore')->name('orderstore');
 
 Route::post('addway', 'FrontendController@addway')->name('addway');
 
-
+Route::get('about', 'FrontendController@about')->name('about');
 
 
 

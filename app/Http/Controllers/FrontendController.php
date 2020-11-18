@@ -190,10 +190,16 @@ class FrontendController extends Controller
         
     }
 
+
     public function addway(Request $request){
 
         $id = $request->township;
         $township = Township::where('id',$id)->get();
         return $township;
+    }
+
+     public function about($value='')
+    {        
+        return view('frontend.about');
     }
 }

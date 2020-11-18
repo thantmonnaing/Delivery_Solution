@@ -262,7 +262,9 @@
 			})
 
 		$("#tbody").on('click','.btn_edit',function(){
+			// alert("edit");
 				var id = $(this).data('id');
+				console.log('id');
 				// var item_list = localStorage.getItem('items');
 				// var item_arr = JSON.parse(item_list);
 				// item_arr[id].qty++;
