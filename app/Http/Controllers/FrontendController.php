@@ -85,7 +85,18 @@ class FrontendController extends Controller
 
 	public function deliverstore(Request $request)
 	{
-        dd($request);
+        // dd($request);
+        if($request->payment == 'kbz'){
+            $request->payment = 'kbz';
+
+        } 
+        elseif ($request->payment == 'wave'){
+            $request->payment = 'wave';
+        }
+        else{
+            $request->payment = 'okdoller';
+        }
+
 		$request-> validate([
             "name" => "required|min:5",
             'email' => 'required|string|email|max:255|unique:users',
@@ -165,18 +176,6 @@ class FrontendController extends Controller
         $payment = $request->payment;
         $orderdate = date('Y-m-d');
 
-        foreach ($myways as $row) { 
-            $way = new Way;
-            $way->item_name = $row->item_name;
-            $way->township_id = $row->township_id;
-            $way->address = $row->receiver_address;
-            $way->phone = $row->receiver_phone;
-            $way->item_weight = $row->item_weight;
-            $way->receiver_name = $row->receiver_name;
-            $way->save();
-        }
-
-        // $customer = Customer::where('user_id',Auth::user()->id)->get();
         $user = Auth::user();
         $customer = $user->customer;
         $customer_id = $customer->id;
@@ -190,18 +189,28 @@ class FrontendController extends Controller
         $order->notes = $notes;// current logined user_id
         $order->save();
 
-        $ways = Way::all();
-        foreach ($ways as $row) { 
-            $township = Township::where('id',$row->township_id)->get();
-            foreach ($township as $t_row) { 
-                $order->ways()->attach($row->id,['total_amount'=>$t_row->price]);
-            }            
+        $way_arr = array();
+        foreach ($myways as $row) { 
+            $way = new Way;
+            $way->item_name = $row->item_name;
+            $way->township_id = $row->township_id;
+            $way->address = $row->receiver_address;
+            $way->phone = $row->receiver_phone;
+            $way->item_weight = $row->item_weight;
+            $way->receiver_name = $row->receiver_name;
+            $way->save();
+
+            array_push($way_arr,$way);
+
+        }
+        foreach ($way_arr as $row) {
+            // dd($row->township->price);
+            $order->ways()->attach($row->id,['total_amount'=>$row->township->price]);          
         }
 
         // ajax response
         return response()
             ->json(['msg' => 'Successful You Order!']);
-        
     }
 
 

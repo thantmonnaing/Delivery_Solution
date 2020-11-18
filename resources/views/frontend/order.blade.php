@@ -282,12 +282,12 @@
           if (notes === "") {
             return true;
           }else{
-          	let payment = $("input[type='radio']").val();
+          	let payment = $("input[name='payment']:checked").val();
             let way = localStorage.getItem('ways'); // JSON String
             $.post("{{route('orderstore')}}",{way:way,payment:payment,notes:notes},function (response) {
             	alert(response.msg);
-              localStorage.clear();
-              location.href="/";
+              	localStorage.clear();
+              	location.href="/";
             })
             e.preventDefault();
           }

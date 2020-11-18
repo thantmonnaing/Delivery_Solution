@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Order;
+use App\Deliver;
 use Illuminate\Http\Request;
 
 class OrderController extends Controller
@@ -48,7 +49,8 @@ class OrderController extends Controller
     public function show(Order $order)
     {
         //
-        return view('backend.order.show',compact('order'));
+        $delivers = Deliver::all();
+        return view('backend.order.show',compact('order','delivers'));
     }
 
     /**
@@ -83,5 +85,13 @@ class OrderController extends Controller
     public function destroy(Order $order)
     {
         //
+    }
+
+    public function getdeliver(Request $request)
+    {
+        $deliver_id = $request->deliver_id;
+        $deliver = Deliver::find($deliver_id);
+
+        return $deliver;
     }
 }

@@ -43,13 +43,8 @@
                                             <td>{{$row->customer->user->name}}</td>
                                             
                                             @foreach($row->ways as $r)
-                                                @if ($loop->last)
                                                    <td>{{$r->pivot->total_amount}}</td>
-                                                @endif   
                                             @endforeach
-
-
-                                                   {{-- <td>{{$row->ways}}</td> --}}
 
                                             <td>
                                                 <a href="{{route('order.show',$row->id)}}" class="btn btn-primary">Detail</a>

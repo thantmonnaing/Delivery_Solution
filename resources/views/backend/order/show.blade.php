@@ -15,21 +15,41 @@
             <div class="tile">
                 <section class="invoice">
                     <div class="row mb-4">
-                        <div class="col-6">
+                        <div class="col-5">
                             <h5 class="mb-4">Date:
                                 {{$order->order_date}}
                             </h5>
                             <h6 class="mb-4">
-                                Invoice #{{$order->order_no}}
+                                Invoice # {{$order->order_no}}
                             </h6>
                         </div>
-                        <div class="col-6 text-right">
-
-                            <form method="post" action="{{route('order.show',$order->id)}}" class="d-inline-block mb-3">
-                                @csrf
-                                <button class="btn btn-info" type="submit">Confirm</button>
-                            </form><br>
-                            <a class="btn btn-primary" href="javascript:window.print();" target="_blank"><i class="fa fa-print"></i> Print</a>
+                        <div class="col-7">
+                            <div class="row">
+                                <div class="col-md-8 col-sm-8 col-lg-8">
+                                    <div class="form-group">
+                                        <div class="col-sm-12">
+                                            <select class="custom-select @error('deliver') is-invalid @enderror get_deliver" id="deliver" name="deliver">
+                                                <option selected hidden value="">Choose Deliver</option>
+                                                @foreach($delivers as $row)
+                                                <option value={{$row->id}}>{{$row->user->name}}</option>
+                                                @endforeach
+                                            </select>
+                                            @error('deliver')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-sm-4 col-lg-4 text-right">
+                                    <form method="post" action="{{route('order.show',$order->id)}}" class="d-inline-block mb-3">
+                                        @csrf
+                                        <button class="btn btn-success" type="submit">Confirm</button>
+                                    </form><br>
+                                    <a class="btn btn-secondary" href="javascript:window.print();" target="_blank"><i class="fa fa-print"></i> Print</a>
+                                </div>
+                            </div>                            
                         </div>
                     </div>
 
@@ -38,7 +58,8 @@
                             <address>
                                 <strong> {{$order->customer->user->name}} 
                             </strong><br>
-                            Email: {{$order->customer->user->email}} </address>
+                            Email: {{$order->customer->user->email}}<br>
+                            Address: {{$order->customer->address}} </address>
                         </div>
                     </div>
                     <div class="row">
@@ -76,14 +97,38 @@
                             </table>
                         </div>
                     </div>
-                    <div class="row d-print-none mt-2">
-
-                    </div>
-
                 </section>
             </div>
         </div>
     </div>
 </main>   
 @endsection
+
+@section('script')
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            $('.get_deliver').change(function(){
+                var deliver = $('#deliver').val();
+                var html = '';
+                $.post("{{route('getdeliver')}}", {deliver_id:deliver}, function(response){
+                    console.log(response);  
+                    if(response !=null){
+                        html+= `
+                            <address>
+                                <strong> {{$order->customer->user->name}} 
+                            </strong><br>
+                            Email: {{$order->customer->user->email}}<br>
+                            Address: {{$order->customer->address}} </address>
+                        `;
+                    }
+                })
+            });
+        })  
+    </script>    
+@endsection  
 
