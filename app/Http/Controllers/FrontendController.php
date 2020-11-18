@@ -158,6 +158,7 @@ class FrontendController extends Controller
 
     public function orderstore(Request $request)
     {     
+
         // dd($request);
         $myways = json_decode($request->way);
         $notes = $request->notes;
@@ -175,13 +176,15 @@ class FrontendController extends Controller
             $way->save();
         }
 
-        $customer = Customer::where('user_id',Auth::user()->id)->get();
+        // $customer = Customer::where('user_id',Auth::user()->id)->get();
+        $user = Auth::user();
+        $customer = $user->customer;
+        $customer_id = $customer->id;
+
         $order = new Order;
         $order->order_no = uniqid();
         $order->order_date = $orderdate;
-        foreach ($customer as $row) { 
-            $order->customer_id =  $row->id;
-        }               
+        $order->customer_id = $customer_id;
         $order->payment_type = $payment;
         $order->status = 0;
         $order->notes = $notes;// current logined user_id
@@ -201,10 +204,16 @@ class FrontendController extends Controller
         
     }
 
+
     public function addway(Request $request){
 
         $id = $request->township;
         $township = Township::where('id',$id)->get();
         return $township;
+    }
+
+     public function about($value='')
+    {        
+        return view('frontend.about');
     }
 }

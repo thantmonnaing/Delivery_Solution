@@ -103,7 +103,7 @@
                                     </a>                                 
                                  @endif
                                  </li>
-                                 <li><a href="#blog">About Us</a></li>
+                                 <li><a href="{{route('about')}}">About Us</a></li>
                                  <li><a href="#contact">Contact Us</a></li>
                               </ul>
                            </nav>
