@@ -94,7 +94,9 @@ Route::get('about', 'FrontendController@about')->name('about');
 
 
 
+Route::post('customerupdate', 'FrontendController@customerupdate')->name('frontend.customerupdate');
 
+Route::get('about', 'FrontendController@about')->name('about');
 
 Auth::routes();
 

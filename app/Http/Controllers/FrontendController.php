@@ -77,10 +77,66 @@ class FrontendController extends Controller
 		return redirect()->route('main');
 	}
 
-     public function edit(Customer $customer)
+     public function edit()
     {   
-        $user=User::all();
-        return view('frontend.profile',compact('customer','user'));
+
+        //$user=User::all();
+        $user = Auth::user();
+        $customer = $user->customer;
+        //$customer=Customer::where('user_id',$id)->get();
+        //dd($customer);
+        return view('frontend.profile',compact('customer'));
+    }
+
+    public function customerupdate(Request $request,Customer $customer)
+    {
+        //dd($request);
+
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255',
+            'photo' => 'sometimes|required|mimes:jpeg,jpg,png',
+            'phone' => 'required|regex:/^([0-9\s\-\+\(\)]*)$/|min:10',
+            'address' => 'required',
+            'business_type' => 'required',
+            'oldphoto'=> 'required',
+            'user_id'=> 'required',
+            'status'=> 'required',
+        ]);
+
+        if($request->file()){
+
+            if(file_exists(public_path($request->oldphoto))){
+                unlink(public_path($request->oldphoto));
+            }              
+
+            $filename = time().'_'.$request->photo->getClientOriginalName();
+            $filepath = $request->file('photo')->storeAS('customerimg', $filename, 'public');
+
+            $path = '/storage/'.$filepath;
+        }else{
+            $path = $request->oldphoto;
+        }
+
+        $user = User::find($request->user_id);
+        //dd($user);
+        $user->name = $request->name;
+        //dd($user->name);
+        $user->email = $request->email;
+        //dd($user->email);
+        $user->save();
+        //dd($user);
+        $customer->user_id = $request->user_id;
+        //dd($customer->user_id);
+        $customer->profile = $path;
+        $customer->phone = $request->phone;
+        $customer->address = $request->address;
+        $customer->status = $request->status;
+        $customer->business_type = $request->business_type;
+        $customer->save();
+        //dd($customer);
+
+        return redirect()->route('main');
     }
 
 	public function deliverstore(Request $request)
