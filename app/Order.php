@@ -16,4 +16,10 @@ class Order extends Model
     			    ->withTimestamps();
 
     }
+
+    public function customer()
+    {
+    	return $this->belongsTo('App\Customer');
+
+    }
 }

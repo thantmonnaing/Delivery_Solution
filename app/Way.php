@@ -16,4 +16,8 @@ class Way extends Model
     			    ->withTimestamps();
 
     }
+
+    public function township(){
+    	return $this->belongsTo('App\Township');
+    }
 }

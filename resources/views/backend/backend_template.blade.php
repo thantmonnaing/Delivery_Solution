@@ -99,12 +99,6 @@
           </a>
         </li>
         <li class="treeview">
-          <a class="app-menu__item {{Request::is('admin*') ? 'active' : ''}}" href="{{route('admin.index')}}">
-            <i class="app-menu__icon fa fa-laptop"></i>
-            <span class="app-menu__label">Admin</span>
-          </a>
-        </li>
-        <li class="treeview">
           <a class="app-menu__item {{Request::is('customer*') ? 'active' : ''}}" href="{{route('customer.index')}}">
             <i class="app-menu__icon fa fa-laptop"></i>
             <span class="app-menu__label">Customer</span>
