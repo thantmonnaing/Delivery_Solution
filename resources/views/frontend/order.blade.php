@@ -10,6 +10,8 @@
 <div class="container-fluid">
 	<div class="row mx-5">
 		<div class="col-12 col-md-4 col-sm-4 col-lg-4">
+
+			{{-- add way --}}
 			<form method="" action="" class="add_way">
 				@csrf					
 				<div class="form-group">
@@ -92,6 +94,90 @@
 					</div>
 				</div>		
 			</form>
+
+			{{-- update way --}}
+			<form method="" action="" class="update_way">
+				@csrf					
+				<input type="hidden" name="uid" id="uid">
+				<div class="form-group">
+					<label for="receiver_name" class="col-sm-12 col-form-label">Receiver Name</label>
+					<div class="col-sm-12">
+						<input id="ureceiver_name" type="text" class="form-control @error('receiver_name') is-invalid @enderror" name="receiver_name" value="{{ old('receiver_name') }}" required autocomplete="receiver_name" autofocus>
+						@error('receiver_name')
+						<span class="invalid-feedback" role="alert">
+							<strong>{{ $message }}</strong>
+						</span>
+						@enderror
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="receiver_phone" class="col-sm-4 col-form-label">Phone</label>
+					<div class="col-sm-12">
+						<input id="ureceiver_phone" type="number" class="form-control @error('receiver_phone') is-invalid @enderror" name="receiver_phone" value="{{ old('receiver_phone') }}" required autocomplete="receiver_phone" autofocus>
+						@error('receiver_phone')
+						<span class="invalid-feedback" role="alert">
+							<strong>{{ $message }}</strong>
+						</span>
+						@enderror
+					</div>
+				</div>					
+				<div class="form-group">
+					<label for="receiver_address" class="col-sm-12 col-form-label">Address</label>
+					<div class="col-sm-12">
+						<textarea id="ureceiver_address" type="text" class="form-control @error('receiver_address') is-invalid @enderror" name="receiver_address" required autocomplete="receiver_address">{{ old('receiver_address') }}</textarea>
+						@error('receiver_address')
+						<span class="invalid-feedback" role="alert">
+							<strong>{{ $message }}</strong>
+						</span>
+						@enderror
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="township_id" class="col-sm-12 col-form-label"> Township </label>
+					<div class="col-sm-12">
+						<select class="custom-select @error('township') is-invalid @enderror receiver_township" id="utownship_id" name="township">
+							@foreach($townships as $row)
+							<option value="{{$row->id}}" id="utownship">{{$row->name}}</option>
+							@endforeach
+						</select>
+						@error('township')
+						<span class="invalid-feedback" role="alert">
+							<strong>{{ $message }}</strong>
+						</span>
+						@enderror
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="item_name" class="col-sm-12 col-form-label">Item Name</label>
+					<div class="col-sm-12">
+						<input id="uitem_name" type="text" class="form-control @error('item_name') is-invalid @enderror" name="item_name" value="{{ old('item_name') }}" required autocomplete="item_name" autofocus>
+
+						@error('item_name')
+						<span class="invalid-feedback" role="alert">
+							<strong>{{ $message }}</strong>
+						</span>
+						@enderror
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="item_weight" class="col-sm-5 col-form-label">Item Weight <small>( kg )</small></label>
+					<div class="col-sm-12">
+						<input id="uitem_weight" type="number" class="form-control @error('item_weight') is-invalid @enderror" name="item_weight" value="{{ old('item_weight') }}" required autocomplete="item_weight" autofocus>
+						@error('item_weight')
+						<span class="invalid-feedback" role="alert">
+							<strong>{{ $message }}</strong>
+						</span>
+						@enderror
+					</div>
+				</div>		
+				<div class="form-group row mt-5">
+					<div class="col-sm-12 text-right mr-3">
+						<button type="submit" class="btn btn-success " id="btn_update">
+							Update
+						</button>
+					</div>
+				</div>		
+			</form>
 		</div>
 		<div class="col-12 col-md-8 col-sm-8 col-lg-8 pl-5">
 			<div class="container">
@@ -152,11 +238,11 @@
 			</form>
 		</div>
 	</div>
-	<div class="row">
-		<div class="col-12 col-md-4 col-sm-4 col-lg-4">
-			<input type="hidden" name="uid" id="uid">
+	{{-- <div class="row">
+		<div class="col-12 col-md-4 col-sm-4 col-lg-4">			
 			<form method="" action="" class="update_way">
 				@csrf					
+				<input type="hidden" name="uid" id="uid">
 				<div class="form-group">
 					<label for="receiver_name" class="col-sm-12 col-form-label">Receiver Name</label>
 					<div class="col-sm-12">
@@ -238,7 +324,7 @@
 				</div>		
 			</form>
 		</div>
-	</div>		
+	</div> --}}		
 </div>
 
 
@@ -255,7 +341,7 @@
 			}
 		});
 		var t_ship = {name:'',price:''};
-		$('.receiver_township').change(function(){
+		$('.receiver_township').change(function(e){
             	// alert($('#township_id').val());
             	var township_id = $('#township_id').val();
             	$.post("{{route('addway')}}", {township:township_id}, function(response){
@@ -265,6 +351,7 @@
                     }               
                     //console.log(t_ship);
                 })
+                e.preventDefault();
             });
 
 		$('.add_way').submit(function(e){
@@ -384,7 +471,7 @@
 				$("#ureceiver_name").val(receiver_name);
 				$("#ureceiver_address").val(receiver_address);
 				$("#ureceiver_phone").val(receiver_phone);
-				$("#utownship").val(township_name);
+				$("#utownship").val(township_id);
 				$("#uitem_name").val(item_name);
 				$("#uitem_weight").val(item_weight);
 				$('#uid').val(id);
@@ -437,6 +524,7 @@
 				getdata();
 
 				e.preventDefault();
+
 		})
 
 		$('.orderform').submit(function(e){
