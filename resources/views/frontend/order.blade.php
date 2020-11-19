@@ -9,7 +9,7 @@
 
 	<div class="container-fluid">
 		<div class="row mx-5">
-			<div class="col-12 col-md-5 col-sm-5 col-lg-5">
+			<div class="col-12 col-md-4 col-sm-4 col-lg-4">
 				<form method="" action="" class="add_way">
 					@csrf					
 					<div class="form-group">
@@ -74,7 +74,7 @@
 						</div>
 					</div>
 					<div class="form-group">
-						<label for="item_weight" class="col-sm-4 col-form-label">Item Weight <small>( kg )</small></label>
+						<label for="item_weight" class="col-sm-5 col-form-label">Item Weight <small>( kg )</small></label>
 						<div class="col-sm-12">
 							<input id="item_weight" type="number" class="form-control @error('item_weight') is-invalid @enderror" name="item_weight" value="{{ old('item_weight') }}" required autocomplete="item_weight" autofocus>
 							@error('item_weight')
@@ -93,7 +93,33 @@
 					</div>		
 				</form>
 			</div>
-			<div class="col-12 col-md-7 col-sm-7 col-lg-7 pl-5">
+			<div class="col-12 col-md-8 col-sm-8 col-lg-8 pl-5">
+				<div class="container">
+					<div class="row">
+						<div class="table-responsive">
+							<table class="table table-hover table-bordered">
+								<thead>
+									<tr>
+										<th>#</th>
+										<th>Receiver Name</th>
+										<th>Address</th>
+										<th>Price</th>
+										<th>Item Name</th>
+										<th>Item Weight</th>
+										<th>Actions</th>
+									</tr>
+								</thead>
+								<tbody id="tbody">
+
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row mt-5">
+			<div class="col-8 col-md-8 container">
 				<form method="" action="" class="orderform">
 					@csrf				
 					<div class="form-group">
@@ -112,16 +138,16 @@
 						</div>
 					</div>
 					<div class="form-group">
-							<textarea id="notes" type="text" class="form-control @error('notes') is-invalid @enderror" name="notes" required placeholder="Notes">{{ old('notes') }}</textarea>
-							<input type="hidden" name="order" value="" id="ls">
-							@error('notes')
-							<span class="invalid-feedback" role="alert">
-								<strong>{{ $message }}</strong>
-							</span>
-							@enderror
+						<textarea id="notes" rows="3" type="text" class="form-control @error('notes') is-invalid @enderror" name="notes" required placeholder="Notes....">{{ old('notes') }}</textarea>
+						<input type="hidden" name="order" value="" id="ls">
+						@error('notes')
+						<span class="invalid-feedback" role="alert">
+							<strong>{{ $message }}</strong>
+						</span>
+						@enderror
 					</div>
-					<div class="form-group d-flex algin-items-center justify-content-between mt-4 mb-0">
-						<button type="submit" class="btn btn-primary mainfullbtncolor">Order</button>
+					<div class="form-group text-right">
+						<button type="submit" class="btn btn-primary mainfullbtncolor px-5 py-3">Order</button>
 					</div>
 				</form>
 			</div>
@@ -129,28 +155,7 @@
 	</div>
 
 
-	<div class="container my-5">
-		<div class="row">
-			<div class="table-responsive">
-				<table class="table table-hover table-bordered">
-					<thead>
-						<tr>
-							<th>#</th>
-							<th>Receiver Name</th>
-							<th>Address</th>
-							<td>Price</td>
-							<th>Item Name</th>
-							<th>Item Weight</th>
-							<th></th>
-						</tr>
-					</thead>
-					<tbody id="tbody">
-
-					</tbody>
-				</table>
-			</div>
-		</div>
-	</div>
+	
 @endsection
 
 @section('script')

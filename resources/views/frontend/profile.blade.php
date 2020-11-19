@@ -9,7 +9,6 @@
         <input type="hidden" name="status" value="{{$customer->status}}">
 		<div class="row">
 			<div class="col-4">
-				<label class="">Photo</label>
 				<div class="d-block">
 					<ul class="nav nav-tabs" id="myTab" role="tablist">
 						<li class="nav-item">
@@ -21,7 +20,7 @@
 					</ul>
 					<div class="tab-content" id="myTabContent">
 						<div class="tab-pane fade show active" id="oldphoto" role="tab-panel" aria-labelledby="oldphoto_tab">
-							<img src="{{asset($customer->profile)}}" width="100px" height="100px" id="add_image" class="img-fluid">
+							<img src="{{asset($customer->profile)}}" width="200px" height="20px" id="add_image" class="img-fluid mt-3">
 							<input type="hidden" name="oldphoto" value="{{$customer->profile}}">
 						</div>
 						<div class="tab-pane fade" id="photo" role="tab-panel" aria-labelledby="photo_tab">
@@ -78,14 +77,16 @@
                         @enderror
 					</div>
 				</div>
-				<div class=" row mr-5 pr-5">
-					<label>Address:</label>
+				<div class="row">
+					<div class="form-group col-lg-8">
+						<label>Address:</label>
             			<textarea class="form-control @error('address') is-invalid @enderror" name="address" >{{$customer->address}}</textarea>
-            		@error('address')
-            		<span class="invalid-feedback" role="alert">
-              			<strong>{{ $message }}</strong>
-            		</span>
-            		@enderror
+	            		@error('address')
+	            		<span class="invalid-feedback" role="alert">
+	              			<strong>{{ $message }}</strong>
+	            		</span>
+	            		@enderror
+					</div>					
 				</div>
 
 				<div class="form-group row ">

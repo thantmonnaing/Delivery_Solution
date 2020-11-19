@@ -47,7 +47,7 @@ class User extends Authenticatable
 
     public function deliver()
     {
-        return $this->hasOne('App\Customer');
+        return $this->hasOne('App\Deliver');
 
     }
 }

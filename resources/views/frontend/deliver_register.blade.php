@@ -3,7 +3,7 @@
 @section('content')
 	<div class="jumbotron jumbotron-fluid subtitle bg-info" >
 		<div class="container ">
-			<h1 class="text-center">Create Account</h1>
+			<h1 class="text-center">Create Deliver Account</h1>
 		</div>
 	</div>
 
@@ -24,7 +24,7 @@
 						</div>
 					</div>  
 
-					<div class="form-group">
+					<div class="form-group row">
 						<label>Name:</label>
 						<input type="text" name="name" class="form-control @error('name') is-invalid @enderror" value="{{old('name')}}">
 						@error('name')
@@ -33,7 +33,7 @@
 						</span>
 						@enderror
 					</div>
-					<div class="form-group ">
+					<div class="form-group row">
 						<label for="email" >Email:</label>
 						<input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
 
@@ -46,7 +46,7 @@
 					</div>
 
 					<div class="form-group row">
-						<div class="col-lg-6">
+						<div class="col-lg-6 pl-0">
 							<label for="password" class="col-md-4 col-form-label ">{{ __('Password') }}</label>
 
 							<input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
@@ -57,13 +57,13 @@
 							</span>
 							@enderror
 						</div>
-						<div class="col-lg-6">
+						<div class="col-lg-6 pr-0">
 							<label for="password-confirm" class=" col-form-label ">{{ __('Confirm Password') }}</label>
 							<input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
 						</div>
 					</div>
 
-					<div class="form-group">
+					<div class="form-group row">
 						<label for="birthday">Date of Birth:</label>
 						<input id="birthday" type="date" name="form" class="form-control  @error('birthday') is-invalid @enderror"  value="{{ old('form') }}" required>
 
@@ -193,7 +193,7 @@
 						<label class="mr-5">Trasport Type</label>
 						<div class="form-check form-check-inline">  					
 							<input class="form-check-input" type="radio" name="transport" id="inlineRadio1" value="car" required>
-							<label class="form-check-label" for="inlineRadio1">Car</label>
+							<label class="form-check-label" for="inlineRadio1">Vehicle</label>
 						</div>
 						<div class="form-check form-check-inline"> 					
 							<input class="form-check-input" type="radio" name="transport" id="inlineRadio2" value="bicycle" required>
@@ -201,7 +201,7 @@
 						</div>
 					</div>
 
-					<div class="form-group">
+					{{-- <div class="form-group">
 						<label class="">Location</label>
 						<select multiple="true" name="township[]" size="5" class="custom-select @error('township') is-invalid @enderror receiver_township" id="township_id" name="township">
 							<option selected hidden value="">Choose Township</option>
@@ -215,7 +215,7 @@
 							</span>
 							@enderror
 						</select>
-					</div>
+					</div> --}}
 
 					<div class="form-group">
 						<label class="mr-5">Payment Type</label>

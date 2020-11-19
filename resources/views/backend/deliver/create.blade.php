@@ -161,10 +161,10 @@
 					</div>
 
 					<div class="form-group">
-						<label class="mr-5">Transport_type:</label>
+						<label class="mr-5">Transport Type:</label>
 						<div class="form-check form-check-inline">  					
 							<input class="form-check-input" type="radio" name="transport" id="inlineRadio1" value="car">
-							<label class="form-check-label" for="inlineRadio1">Car</label>
+							<label class="form-check-label" for="inlineRadio1">Vehicle</label>
 						</div>
 						<div class="form-check form-check-inline"> 					
 							<input class="form-check-input" type="radio" name="transport" id="inlineRadio2" value="bicycle">
@@ -172,22 +172,22 @@
 						</div>
 					</div>
 
-					
 					<div class="form-group">
-						<label class="mr-5">Payment_type:</label>
+						<label class="mr-5">Payment Type</label>
 						<div class="form-check form-check-inline">	
-							<input class="form-check-input" type="radio" name="payment" id="inlineRadio1" value="kbz">
-							<label class="form-check-label" for="inlineRadio1">KBZpay</label>
+							<input class="form-check-input" type="checkbox" name="payment" id="payment_type1" value="kbz">
+							<label class="form-check-label" for="payment_type1">KBZpay</label>
 						</div>
 						<div class="form-check form-check-inline">  				
-							<input class="form-check-input" type="radio" name="payment" id="inlineRadio2" value="wave">
-							<label class="form-check-label" for="inlineRadio2">WaveMoney</label>
+							<input class="form-check-input" type="checkbox" name="payment" id="payment_type2" value="wave"  >
+							<label class="form-check-label" for="payment_type2">WaveMoney</label>
 						</div>
 						<div class="form-check form-check-inline">  				
-							<input class="form-check-input" type="radio" name="payment" id="inlineRadio3" value="okdoller">
-							<label class="form-check-label" for="inlineRadio3">OKdoller</label>
+							<input class="form-check-input" type="checkbox" name="payment" id="payment_type3" value="okdoller"  >
+							<label class="form-check-label" for="payment_type3">OKdoller</label>
 						</div>
 					</div>
+					
 					
 					<div class="form-group">
 						<input type="submit" name="btnsubmit" value="Save" class="btn btn-primary">
@@ -199,3 +199,107 @@
 	</div>
 </main>
 @endsection
+
+@section('script')
+	{{-- <script type="text/javascript">
+		$(document).ready(function(){
+			var options = [];
+			var payments = [];
+
+			$( '.dropdown-menu a' ).on( 'click', function( event ) {
+
+			   var $target = $( event.currentTarget ),
+			       val = $target.attr( 'data-value' ),
+			       $inp = $target.find( 'input' ),
+			       idx;
+
+			   if ( ( idx = options.indexOf( val ) ) > -1 ) {
+			      options.splice( idx, 1 );
+			      setTimeout( function() { $inp.prop( 'checked', false ) }, 0);
+			   } else {
+			      options.push( val );
+			      setTimeout( function() { $inp.prop( 'checked', true ) }, 0);
+			   }
+
+			   $( event.target ).blur();
+			      
+			   console.log( options );
+			   return false;
+			});
+
+			$( '.payment_item a' ).on( 'click', function( event ) {
+
+			   var $target = $( event.currentTarget ),
+			       val = $target.attr( 'data-value' ),
+			       $inp = $target.find( 'input' ),
+			       idx;
+
+			   if ( ( idx = options.indexOf( val ) ) > -1 ) {
+			      options.splice( idx, 1 );
+			      setTimeout( function() { $inp.prop( 'checked', false ) }, 0);
+			   } else {
+			      options.push( val );
+			      setTimeout( function() { $inp.prop( 'checked', true ) }, 0);
+			   }
+
+			   $( event.target ).blur();
+			      
+			   console.log( options );
+			   return false;
+			});
+		})
+	</script> --}}
+@endsection
+
+{{-- <div class="form-group">
+
+	<div class="button-group">
+		<button class="btn btn-primary dropdown-toggle mr-4" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Payment Type</button>
+		<ul>
+			<div class="dropdown-menu">
+				<a class="payment_item" href="#" data-value="kbz" tabIndex="-1">
+					<div class="custom-control custom-checkbox">
+						<input type="checkbox" class="custom-control-input" id="pay1" value="kbz" name="payment">
+						<label class="custom-control-label" for="pay1">KBZPay</label>
+					</div>
+				</a>	
+				<a class="payment_item" href="#" data-value="wave" tabIndex="-1">
+					<div class="custom-control custom-checkbox">
+						<input type="checkbox" class="custom-control-input" id="pay2" value="wave" name="payment">
+						<label class="custom-control-label" for="pay2">Wave Money</label>
+					</div>
+				</a>	
+				<a class="payment_item" href="#" data-value="okdoller" tabIndex="-1">
+					<div class="custom-control custom-checkbox">
+						<input type="checkbox" class="custom-control-input" id="pay3" value="okdoller" name="township">
+						<label class="custom-control-label" for="pay3">OKdoller</label>
+					</div>
+
+					<div class="form-check form-check-inline">		
+						<input class="form-check-input" type="radio" name="payment" id="inlineRadio3" value="okdoller">
+						<label class="form-check-label" for="inlineRadio3">OKdoller</label>
+					</div>
+				</a>							    	
+			</div>
+		</ul>
+	</div>
+</div>
+
+<div class="form-group">
+	<div class="button-group">
+		<button class="btn btn-primary dropdown-toggle mr-4" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Choose Township</button>
+		<ul>
+			<div class="dropdown-menu">
+				@foreach($townships as $row)
+				<a class="dropdown-item" href="#" data-value="{{$row->id}}" tabIndex="-1">
+					<!-- Default unchecked -->
+					<div class="custom-control custom-checkbox">
+						<input type="checkbox" class="custom-control-input" id="checkbox{{$row->id}}" value="{{$row->id}}" name="township">
+						<label class="custom-control-label" for="checkbox{{$row->id}}">{{$row->name}}</label>
+					</div>
+				</a>							    	
+				@endforeach
+			</div>
+		</ul>
+	</div>
+</div> --}}

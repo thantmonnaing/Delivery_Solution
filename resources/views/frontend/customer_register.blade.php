@@ -3,7 +3,7 @@
 @section('content')
 	<div class="jumbotron jumbotron-fluid subtitle bg-info" >
 		<div class="container ">
-			<h1 class="text-center">Create Account</h1>
+			<h1 class="text-center">Create Customer Account</h1>
 		</div>
 	</div>
 	<div class="container my-5">

@@ -11,7 +11,6 @@
 
 				<div class="row">
 					<div class="col-lg-4 ">
-						<div><label>Photo</label></div>
 						<div class="d-block">
 							<ul class="nav nav-tabs" id="myTab" role="tablist">
 								<li class="nav-item">
@@ -23,7 +22,7 @@
 							</ul>
 							<div class="tab-content" id="myTabContent">
 								<div class="tab-pane fade show active" id="oldphoto" role="tab-panel" aria-labelledby="oldphoto_tab">
-									<img src="{{asset($deliver->profile)}}" width="100px" height="100px" id="add_image" class="img-fluid">
+									<img src="{{asset($deliver->profile)}}" width="200px" height="200px" id="add_image" class="img-fluid mt-5">
 									<input type="hidden" name="oldphoto" value="{{$deliver->profile}}">
 								</div>
 								<div class="tab-pane fade" id="photo" role="tab-panel" aria-labelledby="photo_tab">

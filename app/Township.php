@@ -12,7 +12,7 @@ class Township extends Model
 
 
     public function delivers(){
-    	return $this->belongsToMany('App\Deliver','delivertownships', 'townships_id', 'delivers_id');
+    	return $this->belongsToMany('App\Deliver');
     }	
 	
     public function ways(){

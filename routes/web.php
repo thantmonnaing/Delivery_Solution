@@ -107,3 +107,7 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('about', 'FrontendController@about')->name('about');
+
+Route::get('customerhistory', 'FrontendController@customerhistory')->name('customerhistory');
+
+Route::get('deliverhistory', 'FrontendController@deliverhistory')->name('deliverhistory');

@@ -96,9 +96,10 @@
                                        <div class="dropdown-menu">
                                           
                                           @if(Auth::user()->hasRole('customer'))
+                                          <a href="{{route('customerhistory')}}" class="dropdown-item">Order History</a>
                                           <a href="{{route('frontend.profile')}}" class="dropdown-item">Profile</a>
                                           @else
-                                          
+                                          <a href="{{route('deliverhistory')}}" class="dropdown-item">Order History</a>
                                           <a href="{{route('frontend.deliverprofile')}}" class="dropdown-item">Profile</a>
                                           @endif
 

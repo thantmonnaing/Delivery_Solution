@@ -213,14 +213,9 @@ class FrontendController extends Controller
 
     public function deliveredit()
     {   
-
         $user = Auth::user();
-        //dd($user);
-        //$deliver = $user->deliver;
-        $deliver=Deliver::find($user->id);
-        //$deliver=Deliver::where('user_id',$id)->get();
-        //dd($deliver);
-        return view('frontend.deliverprofile',compact('deliver','user'));
+        $deliver = $user->deliver;
+        return view('frontend.deliverprofile',compact('deliver'));
        
     }
 
@@ -291,7 +286,7 @@ class FrontendController extends Controller
     public function logout($value='')
     {
         Auth::logout();
-        return view('frontend.main');
+        return view('frontend.login');
     }
 
     public function order($value='')
@@ -356,8 +351,20 @@ class FrontendController extends Controller
         return $township;
     }
 
-     public function about($value='')
+    public function about($value='')
     {        
         return view('frontend.about');
+    }
+
+    public function customerhistory($value='')
+    {        
+        $order_confirm = Order::all();
+        return view('frontend.customer_order_history',compact('order_confirm'));
+    }
+
+    public function deliverhistory($value='')
+    {   
+        $order_confirm = Order::where('status',1)->get();     
+        return view('frontend.deliver_order_history',compact('order_confirm'));
     }
 }
