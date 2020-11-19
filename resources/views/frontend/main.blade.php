@@ -71,7 +71,7 @@
 				var price = t_ship.price ;
 				var total = 0;
 				if(item_weight > 3){
-					total = parseInt(price) * parseFloat(item_weight);
+					total = parseInt(price) + ((parseFloat(item_weight) - 3) * 500);
 				}else{
 					total = price;
 				}

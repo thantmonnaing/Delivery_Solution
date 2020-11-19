@@ -135,9 +135,10 @@
 				<div class="form-group">
 					<label for="township_id" class="col-sm-12 col-form-label"> Township </label>
 					<div class="col-sm-12">
-						<select class="custom-select @error('township') is-invalid @enderror receiver_township" id="utownship_id" name="township">
+						<select class="custom-select @error('township') is-invalid @enderror update_township" id="utownship_id" name="township">
+							<option selected hidden value="">Choose Township</option>
 							@foreach($townships as $row)
-							<option value="{{$row->id}}" id="utownship">{{$row->name}}</option>
+							<option value="{{$row->id}}">{{$row->name}}</option>
 							@endforeach
 						</select>
 						@error('township')
@@ -172,7 +173,7 @@
 				</div>		
 				<div class="form-group row mt-5">
 					<div class="col-sm-12 text-right mr-3">
-						<button type="submit" class="btn btn-success " id="btn_update">
+						<button type="submit" class="btn btn-success ">
 							Update
 						</button>
 					</div>
@@ -237,94 +238,7 @@
 				</div>
 			</form>
 		</div>
-	</div>
-	{{-- <div class="row">
-		<div class="col-12 col-md-4 col-sm-4 col-lg-4">			
-			<form method="" action="" class="update_way">
-				@csrf					
-				<input type="hidden" name="uid" id="uid">
-				<div class="form-group">
-					<label for="receiver_name" class="col-sm-12 col-form-label">Receiver Name</label>
-					<div class="col-sm-12">
-						<input id="ureceiver_name" type="text" class="form-control @error('receiver_name') is-invalid @enderror" name="receiver_name" value="{{ old('receiver_name') }}" required autocomplete="receiver_name" autofocus>
-						@error('receiver_name')
-						<span class="invalid-feedback" role="alert">
-							<strong>{{ $message }}</strong>
-						</span>
-						@enderror
-					</div>
-				</div>
-				<div class="form-group">
-					<label for="receiver_phone" class="col-sm-4 col-form-label">Phone</label>
-					<div class="col-sm-12">
-						<input id="ureceiver_phone" type="number" class="form-control @error('receiver_phone') is-invalid @enderror" name="receiver_phone" value="{{ old('receiver_phone') }}" required autocomplete="receiver_phone" autofocus>
-						@error('receiver_phone')
-						<span class="invalid-feedback" role="alert">
-							<strong>{{ $message }}</strong>
-						</span>
-						@enderror
-					</div>
-				</div>					
-				<div class="form-group">
-					<label for="receiver_address" class="col-sm-12 col-form-label">Address</label>
-					<div class="col-sm-12">
-						<textarea id="ureceiver_address" type="text" class="form-control @error('receiver_address') is-invalid @enderror" name="receiver_address" required autocomplete="receiver_address">{{ old('receiver_address') }}</textarea>
-						@error('receiver_address')
-						<span class="invalid-feedback" role="alert">
-							<strong>{{ $message }}</strong>
-						</span>
-						@enderror
-					</div>
-				</div>
-				<div class="form-group">
-					<label for="township_id" class="col-sm-12 col-form-label"> Township </label>
-					<div class="col-sm-12">
-						<select class="custom-select @error('township') is-invalid @enderror receiver_township" id="utownship_id" name="township">
-							<option selected hidden value="">Choose Township</option>
-							@foreach($townships as $row)
-							<option value={{$row->id}} id="utownship">{{$row->name}}</option>
-							@endforeach
-						</select>
-						@error('township')
-						<span class="invalid-feedback" role="alert">
-							<strong>{{ $message }}</strong>
-						</span>
-						@enderror
-					</div>
-				</div>
-				<div class="form-group">
-					<label for="item_name" class="col-sm-12 col-form-label">Item Name</label>
-					<div class="col-sm-12">
-						<input id="uitem_name" type="text" class="form-control @error('item_name') is-invalid @enderror" name="item_name" value="{{ old('item_name') }}" required autocomplete="item_name" autofocus>
-
-						@error('item_name')
-						<span class="invalid-feedback" role="alert">
-							<strong>{{ $message }}</strong>
-						</span>
-						@enderror
-					</div>
-				</div>
-				<div class="form-group">
-					<label for="item_weight" class="col-sm-5 col-form-label">Item Weight <small>( kg )</small></label>
-					<div class="col-sm-12">
-						<input id="uitem_weight" type="number" class="form-control @error('item_weight') is-invalid @enderror" name="item_weight" value="{{ old('item_weight') }}" required autocomplete="item_weight" autofocus>
-						@error('item_weight')
-						<span class="invalid-feedback" role="alert">
-							<strong>{{ $message }}</strong>
-						</span>
-						@enderror
-					</div>
-				</div>		
-				<div class="form-group row mt-5">
-					<div class="col-sm-12 text-right mr-3">
-						<button type="submit" class="btn btn-success " id="btn_update">
-							Update
-						</button>
-					</div>
-				</div>		
-			</form>
-		</div>
-	</div> --}}		
+	</div>	
 </div>
 
 
@@ -340,7 +254,8 @@
 				'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
 			}
 		});
-		var t_ship = {name:'',price:''};
+		var t_ship = {name:'',price:''};	
+		var u_ship = {name:'',price:''};	
 		$('.receiver_township').change(function(e){
             	// alert($('#township_id').val());
             	var township_id = $('#township_id').val();
@@ -395,7 +310,12 @@
 			getdata();
 				// location.href="/";
 				e.preventDefault();
-			})      
+
+				$('.add_way input[type="text"]').val('');
+				$('.add_way input[type="number"]').val('');
+				$("#receiver_address").val('');
+				$("#township_id").val('');
+		})      
 
 		function getdata(){
 			var way_arr,html="",total = 0;
@@ -446,41 +366,54 @@
 				$('.update_way').show();
 				$('.add_way').hide();
 				var id=$(this).data('id');
-				console.log(id);
+				// console.log(id);
 				var itemlist=localStorage.getItem("ways");
 				var itemArray=JSON.parse(itemlist);
-				console.log(itemArray);
+				// console.log(itemArray);
 				// // item_arr[id].qty++;
 
 				var item =itemArray[id];
 				var receiver_name=item.receiver_name;
-				console.log(receiver_name);
+				// console.log(receiver_name);
 				var receiver_phone=item.receiver_phone;
-				console.log(receiver_phone);
+				// console.log(receiver_phone);
 				var receiver_address=item.receiver_address;
-				console.log(receiver_address);
+				// console.log(receiver_address);
 				var township_name=item.township_name;
-				console.log(township_name);
+				u_ship.name = township_name;
 				var township_id=item.township_id;
-				console.log(township_id);
+				// console.log(township_id);
 				var item_name=item.item_name;
-				console.log(item_name);
+				// console.log(item_name);
 				var item_weight=item.item_weight;
-				console.log(item_weight);
+				// console.log(item_weight);
 
 				$("#ureceiver_name").val(receiver_name);
 				$("#ureceiver_address").val(receiver_address);
 				$("#ureceiver_phone").val(receiver_phone);
-				$("#utownship").val(township_id);
+				$("#utownship_id").val(township_id);
 				$("#uitem_name").val(item_name);
 				$("#uitem_weight").val(item_weight);
 				$('#uid').val(id);
 
 
-		})
+		});
 
-		$("#btn_update").click(function(e){
-				//alert('ok');
+		
+		$('.update_township').change(function(e){
+            	// alert($('#township_id').val());
+            	var township_id = $('#utownship_id').val();
+            	$.post("{{route('addway')}}", {township:township_id}, function(response){
+                    // alert(response);  
+                    if(response.length > 0){
+                    	u_ship = response[0];
+                    }               
+                    console.log("u township"+JSON.stringify(u_ship));
+                })
+                e.preventDefault();
+            });
+
+		$(".update_way").submit(function(e){
 				var id=$('#uid').val();
 				console.log(id);
 				var receiver_name=$("#ureceiver_name").val();
@@ -498,7 +431,7 @@
 				var price = t_ship.price ;
 					$total = 0;
 					if(item_weight > 3){
-					total = parseInt(price) + ((parseFloat(item_weight) - 3) * 500);
+						total = parseInt(price) + ((parseFloat(item_weight) - 3) * 500);
 					}else{
 						total = price;
 					}
@@ -508,6 +441,7 @@
 					receiver_phone :receiver_phone,
 					receiver_address :receiver_address,
 					township_id :receiver_township,
+					township_name :u_ship.name,
 					item_name :item_name,
 					item_weight :item_weight,
 					price : total
@@ -524,6 +458,13 @@
 				getdata();
 
 				e.preventDefault();
+
+				$('.update_way').hide();
+				$('.add_way').show();
+				$('.add_way input[type="text"]').val('');
+				$('.add_way input[type="number"]').val('');
+				$("#receiver_address").val('');
+				$("#township_id").val('');
 
 		})
 

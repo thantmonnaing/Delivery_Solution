@@ -48,7 +48,7 @@
                                     </div>
 
                                     <div class="col-md-4 col-sm-4 col-lg-4 pt-3">
-                                        <button type="submit" class="btn btn-primary mainfullbtncolor">Confirm</button>
+                                        <button type="submit" class="btn btn-primary mainfullbtncolor print_btn">Confirm</button>
                                     </div>
                                 </div>
                             </form>                             
@@ -150,7 +150,21 @@
                 }else{// JSON String
                     $.post("{{route('order.confirm')}}",{deliver_id:deliver_id,order_id:order_id},function (response) {
                         // alert(response.msg);
-                        location.href="/order";
+                        $('.print_btn').hide();
+                        $('#deliver').hide();
+                        window.print();
+                        $.toast({
+                            heading: 'Success',
+                            text: 'Your Invoice is successful!',
+                            showHideTransition: 'slide',
+                            position: 'top-center',
+                            icon: 'success',
+                            hideAfter: 10000,
+
+                            afterHidden: function () {
+                                location.href="/order";
+                            }
+                        });
                     })
                     e.preventDefault();
                 }
@@ -158,4 +172,9 @@
         })  
     </script>    
 @endsection  
+
+@section('script')
+    <script type="text/javascript">
+    </script>
+@endsection
 
