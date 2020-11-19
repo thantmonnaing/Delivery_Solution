@@ -80,7 +80,7 @@
                                        <a href="{{route('frontend.order')}}">Order</a>
                                     @endrole   
                                     @else
-                                       <div class="nav-item dropdown">
+                                    <div class="nav-item dropdown">
                                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Register</a>
                                        <div class="dropdown-menu">
                                           <a href="{{route('frontend.customerregister')}}" class="dropdown-item">Customer</a>
@@ -94,7 +94,6 @@
                                     <div class="nav-item dropdown">
                                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">{{ Auth::user()->name }}</a>
                                        <div class="dropdown-menu">
-                                          
                                           @if(Auth::user()->hasRole('customer'))
                                           <a href="{{route('customerhistory')}}" class="dropdown-item">Order History</a>
                                           <a href="{{route('frontend.profile')}}" class="dropdown-item">Profile</a>

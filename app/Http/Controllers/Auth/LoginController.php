@@ -5,7 +5,8 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
-
+use Illuminate\Support\Facades\Auth;
+use Session;
 class LoginController extends Controller
 {
     /*
@@ -37,18 +38,51 @@ class LoginController extends Controller
     {
         $this->middleware('guest')->except('logout');
     }
+
+
     protected function redirectTo()
     {
-        $roles =auth()->user()->getRoleNames();//getRoleNames
+         $roles =auth()->user()->getRoleNames();//getRoleNames
 
-        //Check user role
-        switch ($roles[0]) {
-            case 'admin':
-                return 'customer';
-            break;
+        if(Auth::user()->hasRole('customer')){
+            $user=auth()->user()->customer;
+            //dd($user->status);
 
-            default:
-                return '/';                
+            if($user->status==1)
+            {
+                //$message = 'Your account has been suspended. Please contact administrator.';
+                // return view('frontend.login')->withMessage($message);
+                Session::flash('message', "Your account has been suspended. Please contact administrator");
+                $this->redirectTo = 'frontendlogin';
+                return $this->redirectTo;
+
+            }
+
         }
+        elseif (Auth::user()->hasRole('deliver'))
+        {
+            $user=auth()->user()->deliver;
+            //dd($user->status);
+            if($user->status==1)
+            {
+                Session::flash('message', "Your account has been suspended. Please contact administrator");
+                $this->redirectTo = 'frontendlogin';
+                return $this->redirectTo;
+            }
+
+        }
+           
+            //Check user role
+            switch ($roles[0]) {
+                case 'admin':
+                    return 'customer';
+                    break;
+
+                    default:
+                        return '/';
+            }
+        
+
     }
+
 }
