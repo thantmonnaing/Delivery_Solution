@@ -1,16 +1,6 @@
 @extends('frontend.frontend_template')
 @section('content')
 <section >
-	<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-	  <ol class="carousel-indicators">
-	    <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active">
-	  </ol>
-	  <div class="carousel-inner">
-	    <div class="carousel-item active">
-	      <img src="frontend_asset/images/about.jpg" class="d-block w-100" alt="...">
-	    </div>
-	  </div>
-	</div>
 
 	{{-- Text Section	 --}}
 	<div class="container">

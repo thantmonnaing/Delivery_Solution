@@ -22,6 +22,7 @@
                             $i=1;
                             @endphp
                             @foreach($order_confirm as $row)
+                            @if($row->status != 0)
                             <tr>
                                 <td>{{$i++}}</td>
                                 <td>{{$row->order_no}}</td>
@@ -44,11 +45,12 @@
                                         <a href="{{route('order.done',$row->id)}}" class="text-success m-3">Done</a>
                                         <a href="{{route('order.way',$row->id)}}" class="text-info">Way</a>
                                     </td>
-                                @else
+                                @elseif($row->status == 3)
                                     <td><a href="#" class="tex-decoration-none text-success">Success</a></td>  
                                 @endif
                             </tr>
-                              @endforeach
+                            @endif
+                            @endforeach
                       </tbody>
                   </table>
                 </div>

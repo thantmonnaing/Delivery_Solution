@@ -47,8 +47,10 @@
                                     <td>{{$total}}</td>
                                 @if($row->status == 0)
                                     <td><a href="#" class="tex-decoration-none text-warning">Pending</a></td>
-                                @else
+                                @elseif($row->status == 3)
                                     <td><a href="#" class="tex-decoration-none text-success">Success</a></td>
+                                @else
+                                    <td><a href="#" class="tex-decoration-none text-info">Confirm</a></td>
                                 @endif
                             </tr>
                               @endforeach

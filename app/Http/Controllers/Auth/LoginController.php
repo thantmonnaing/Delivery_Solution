@@ -44,43 +44,44 @@ class LoginController extends Controller
     {
          $roles =auth()->user()->getRoleNames();//getRoleNames
 
-        if(Auth::user()->hasRole('customer')){
+        if($roles[0] == 'customer'){
             $user=auth()->user()->customer;
-            //dd($user->status);
-
             if($user->status==1)
             {
-                //$message = 'Your account has been suspended. Please contact administrator.';
-                // return view('frontend.login')->withMessage($message);
                 Session::flash('message', "Your account has been suspended. Please contact administrator");
-                $this->redirectTo = 'frontendlogin';
-                return $this->redirectTo;
+                Auth::logout();
+                return 'frontendlogin';
+            }else{
 
+                return '/';
             }
 
         }
-        elseif (Auth::user()->hasRole('deliver'))
+        elseif($roles[0] == 'deliver')
         {
             $user=auth()->user()->deliver;
-            //dd($user->status);
             if($user->status==1)
             {
                 Session::flash('message', "Your account has been suspended. Please contact administrator");
-                $this->redirectTo = 'frontendlogin';
-                return $this->redirectTo;
+                Auth::logout();
+                return 'frontendlogin';
+            }else{
+               return '/'; 
             }
 
+        }else{
+            return 'customer';
         }
            
             //Check user role
-            switch ($roles[0]) {
-                case 'admin':
-                    return 'customer';
-                    break;
+            // switch ($roles[0]) {
+            //     case 'admin':
+            //         return 'customer';
+            //         break;
 
-                    default:
-                        return '/';
-            }
+            //         default:
+            //             return '/';
+            // }
         
 
     }

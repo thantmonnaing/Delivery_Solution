@@ -7,36 +7,43 @@
 			<div class="text-bg">
 				<h1>Delivery<br><strong class="white">Solution</strong></h1>
 				<div class="container">
-					<form class="main-form">
-						<h3>Calculate Price</h3>
-						<div class="row">
-							<div class="col-md-9 col-12">
-								<div class="row">									
-									<div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-12">
-										<label >Category</label>
-										<select class="custom-select @error('township') is-invalid @enderror receiver_township" id="township_id" name="township">
-											<option selected hidden value="">Choose Township</option>
-											@foreach($townships as $row)
-												<option value={{$row->id}}>{{$row->name}}</option>
-											@endforeach
-										</select>
+					<div class="row">
+						<div class="col-10 col-md-10 col-sm-10 col-lg-10">
+							<form class="main-form">
+								<h3>Calculate Price</h3>
+								<div class="row">
+									<div class="col-md-9 col-12">
+										<div class="row">									
+											<div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-12">
+												<label >Township</label>
+												<select class="custom-select @error('township') is-invalid @enderror receiver_township" id="township_id" name="township">
+													<option selected hidden value="">Choose Township</option>
+													@foreach($townships as $row)
+														<option value={{$row->id}}>{{$row->name}}</option>
+													@endforeach
+												</select>
+											</div>
+											<div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-12">
+												<label >Weight</label>
+												<input class="form-control" placeholder="" type="number" name="item_weight" id="item_weight">
+											</div>
+											<div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-12 mt-4">
+												<button class="btn btn-success search">Calculate</button>												
+											</div>
+										</div>
 									</div>
-									<div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-12">
-										<label >Weight</label>
-										<input class="form-control" placeholder="" type="number" name="item_weight" id="item_weight">
-									</div>
-									<div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-12">
+									
+								</div>
+								<div class="row align-center">
+									<div class="col-xl-3 col-lg-3 col-md-13 col-sm-3 col-12 mt-4 px-3 offset-3">
+										{{-- <a href="" class="search">search</a> --}}
 										<label >Price</label>
-										<input class="form-control" placeholder="" type="number" name="price" id="price" readonly>
+										<input class="form-control" placeholder="" type="number" name="price" id="price" readonly style="background-color: #fff;color:#000;">
 									</div>
 								</div>
-							</div>
-							<div class="col-xl-3 col-lg-3 col-md-3 col-sm-12 col-12 mt-4 px-3">
-								{{-- <a href="" class="search">search</a> --}}
-								<button class="btn btn-success search">Search</button>
-							</div>
+							</form>
 						</div>
-					</form>
+					</div>
 				</div>
 			</div>
 		</div>
