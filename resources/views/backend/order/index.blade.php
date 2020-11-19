@@ -62,7 +62,7 @@
                             </table>
                         </div>
                         <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                            <table class="table mt-3 table-bordered" id="sampleTable">
+                            <table class="table mt-3 table-bordered" id="sampleTable1">
                                 <thead>
                                     <tr>
                                         <th>No</th>
@@ -122,6 +122,7 @@
 <script type="text/javascript" src="{{asset('backend_asset/js/plugins/dataTables.bootstrap.min.js')}}"></script>
 <script type="text/javascript">
 	$('#sampleTable').DataTable();
+    $('#sampleTable1').DataTable();
 </script>
 
 @endsection
