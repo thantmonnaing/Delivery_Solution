@@ -392,7 +392,7 @@
 
 		})
 
-		$("#btn_update").click(function(){
+		$("#btn_update").click(function(e){
 				//alert('ok');
 				var id=$('#uid').val();
 				console.log(id);
@@ -436,6 +436,7 @@
 				localStorage.setItem('ways',itemstring);
 				getdata();
 
+				e.preventDefault();
 		})
 
 		$('.orderform').submit(function(e){
