@@ -111,3 +111,7 @@ Route::get('about', 'FrontendController@about')->name('about');
 Route::get('customerhistory', 'FrontendController@customerhistory')->name('customerhistory');
 
 Route::get('deliverhistory', 'FrontendController@deliverhistory')->name('deliverhistory');
+
+Route::get('done/{id}', 'FrontendController@done')->name('order.done');
+
+Route::get('orderway/{id}', 'FrontendController@orderway')->name('order.way');

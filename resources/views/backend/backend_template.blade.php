@@ -14,7 +14,8 @@
     <meta property="og:url" content="http://pratikborsadiya.in/blog/vali-admin">
     <meta property="og:image" content="http://pratikborsadiya.in/blog/vali-admin/hero-social.png">
     <meta property="og:description" content="Vali is a responsive and free admin theme built with Bootstrap 4, SASS and PUG.js. It's fully customizable and modular.">
-    <title>Blank Page - Vali Admin</title>
+    <title>Delivery Solution</title>
+    <link rel="stylesheet" type="text/css" href="{{asset('frontend_asset/images/logo_icon.png')}}">
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -29,12 +30,12 @@
       <!-- Sidebar toggle button--><a class="app-sidebar__toggle" href="#" data-toggle="sidebar" aria-label="Hide Sidebar"></a>
       <!-- Navbar Right Menu-->
       <ul class="app-nav">
-        <li class="app-search">
+        {{-- <li class="app-search">
           <input class="app-search__input" type="search" placeholder="Search">
           <button class="app-search__button"><i class="fa fa-search"></i></button>
-        </li>
+        </li> --}}
         <!--Notification Menu-->
-        <li class="dropdown"><a class="app-nav__item" href="#" data-toggle="dropdown" aria-label="Show notifications"><i class="fa fa-bell-o fa-lg"></i></a>
+        {{-- <li class="dropdown"><a class="app-nav__item" href="#" data-toggle="dropdown" aria-label="Show notifications"><i class="fa fa-bell-o fa-lg"></i></a>
           <ul class="app-notification dropdown-menu dropdown-menu-right">
             <li class="app-notification__title">You have 4 new notifications.</li>
             <div class="app-notification__content">
@@ -73,52 +74,55 @@
             </div>
             <li class="app-notification__footer"><a href="#">See all notifications.</a></li>
           </ul>
-        </li>
+        </li> --}}
         <!-- User Menu-->
-        <li class="dropdown"><a class="app-nav__item" href="#" data-toggle="dropdown" aria-label="Open Profile Menu"><i class="fa fa-user fa-lg"></i></a>
-          <ul class="dropdown-menu settings-menu dropdown-menu-right">
-            <li><a class="dropdown-item" href="{{route('admin.logout')}}"><i class="fa fa-sign-out fa-lg"></i> Logout</a></li>
-          </ul>
+        <li class="dropdown"><h5 class="app-nav__item">{{-- <i class="fa fa-user fa-lg"></i> --}}
+          @if(Auth::check()){{ Auth::user()->name }} @endif
+        </h5>          
+        </li>
+        <li>
+          {{-- <i class="fa fa-sign-out fa-lg"></i> --}}
+          <a class="app-nav__item" href="{{route('admin.logout')}}"><h5> Logout</h5></a>
         </li>
       </ul>
     </header>
     <!-- Sidebar menu-->
     <div class="app-sidebar__overlay" data-toggle="sidebar"></div>
     <aside class="app-sidebar">
-      <div class="app-sidebar__user"><img class="app-sidebar__user-avatar" src="https://s3.amazonaws.com/uifaces/faces/twitter/jsa/48.jpg" alt="User Image">
+      {{-- <div class="app-sidebar__user"><img class="app-sidebar__user-avatar" src="https://s3.amazonaws.com/uifaces/faces/twitter/jsa/48.jpg" alt="User Image">
         <div>
           <p class="app-sidebar__user-name">@if(Auth::check()){{ Auth::user()->name }} @endif</p>
           <p class="app-sidebar__user-designation">Admin</p>
         </div>
-      </div>
+      </div> --}}
       <ul class="app-menu">
         <li class="treeview">
           <a class="app-menu__item {{Request::is('customer*') ? 'active' : ''}}" href="{{route('customer.index')}}">
-            <i class="app-menu__icon fa fa-laptop"></i>
+            <i class="app-menu__icon fa fa-user"></i>
             <span class="app-menu__label">Customer</span>
           </a>
         </li>
         <li class="treeview">
           <a class="app-menu__item {{Request::is('deliver*') ? 'active' : ''}}" href="{{route('deliver.index')}}">
-            <i class="app-menu__icon fa fa-laptop"></i>
+            <i class="app-menu__icon fa fa-bicycle"></i>
             <span class="app-menu__label">Deliver</span>
           </a>
         </li>
         <li class="treeview">
           <a class="app-menu__item {{Request::is('order*') ? 'active' : ''}}" href="{{route('order.index')}}">
-            <i class="app-menu__icon fa fa-laptop"></i>
+            <i class="app-menu__icon fa fa-th-list"></i>
             <span class="app-menu__label">Order</span>
           </a>
         </li>       
         <li class="treeview">
           <a class="app-menu__item {{Request::is('township*') ? 'active' : ''}}" href="{{route('township.index')}}">
-            <i class="app-menu__icon fa fa-laptop"></i>
+            <i class="app-menu__icon fa fa-map-marker"></i>
             <span class="app-menu__label">Township</span>
           </a>
         </li>
         <li class="treeview">
           <a class="app-menu__item {{Request::is('blacklist*') ? 'active' : ''}}" href="{{route('blacklist')}}">          
-            <i class="app-menu__icon fa fa-laptop"></i>
+            <i class="app-menu__icon fa fa-ban"></i>
             <span class="app-menu__label">Black List</span>
           </a>
         </li>

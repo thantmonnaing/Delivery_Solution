@@ -96,7 +96,13 @@
                                                    @php $total+= $w_row->pivot->total_amount; @endphp
                                             @endforeach
                                             <td>{{$total}}</td>
-                                            <td><a href="#" class="btn btn-primary">Process</a></td>
+                                            @if($row->status == 1)
+                                                <td>
+                                                    <a href="#" class="text-info">Process</a>
+                                                </td>
+                                            @elseif($row->status == 3)
+                                                <td><span class="text-success">Success</a></td>  
+                                            @endif
                                         </tr>
                                     @endforeach
                                 </tbody>

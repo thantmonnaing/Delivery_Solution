@@ -290,9 +290,9 @@
           	let payment = $("input[name='payment']:checked").val();
             let way = localStorage.getItem('ways'); // JSON String
             $.post("{{route('orderstore')}}",{way:way,payment:payment,notes:notes},function (response) {
-            	alert(response.msg);
+            	// alert(response.msg);
               	localStorage.clear();
-              	location.href="/";
+              	location.href="/customerhistory";
             })
             e.preventDefault();
           }

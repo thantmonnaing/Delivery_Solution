@@ -25,27 +25,33 @@
                             <tr>
                                 <td>{{$i++}}</td>
                                 <td>{{$row->order_no}}</td>
+                                @if(count($row->delivers) > 0)
                                 @foreach($row->delivers as $del)
-                                <td>{{$del->pivot->date}}</td>
-                                <td>{{$row->customer->user->name}}</td>
-                                <td>
-                                  {{$del->user->name}}
-                              </td>    
-                              @endforeach                                      
-                              @php 
-                              $total = 0;
-                              @endphp
-                              @foreach($row->ways as $w_row)
-                              @php $total+= $w_row->pivot->total_amount; @endphp
+                                    <td>{{$del->pivot->date}}</td>
+                                    <td>{{$row->customer->user->name}}</td>
+                                    <td>
+                                        {{$del->user->name}}
+                                    </td>    
+                                @endforeach
+                                @else
+                                    <td> - </td>
+                                    <td> - </td>
+                                    <td> - </td>
+                                @endif                                      
+                                @php 
+                                $total = 0;
+                                @endphp
+                                @foreach($row->ways as $w_row)
+                                @php $total+= $w_row->pivot->total_amount; @endphp
+                                @endforeach
+                                    <td>{{$total}}</td>
+                                @if($row->status == 0)
+                                    <td><a href="#" class="tex-decoration-none text-warning">Pending</a></td>
+                                @else
+                                    <td><a href="#" class="tex-decoration-none text-success">Success</a></td>
+                                @endif
+                            </tr>
                               @endforeach
-                              <td>{{$total}}</td>
-                              @if()
-                              <td><a href="#" class="tex-decoration-none">Pending</a></td>
-                              @else
-
-                              @endif
-                          </tr>
-                          @endforeach
                       </tbody>
                   </table>
                 </div>
@@ -53,14 +59,4 @@
         </div>
     </div>
 </main>
-@endsection
-
-@section('script')
-
-<script type="text/javascript" src="{{asset('backend_asset/js/plugins/jquery.dataTables.min.js')}}"></script>
-<script type="text/javascript" src="{{asset('backend_asset/js/plugins/dataTables.bootstrap.min.js')}}"></script>
-<script type="text/javascript">
-	$('#sampleTable').DataTable();
-</script>
-
 @endsection

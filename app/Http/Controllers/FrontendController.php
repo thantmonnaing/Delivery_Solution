@@ -74,17 +74,15 @@ class FrontendController extends Controller
 
         $user->assignRole('customer');
 
+        Auth::login($user);
+
 		return redirect()->route('main');
 	}
 
      public function edit()
     {   
-
-        //$user=User::all();
         $user = Auth::user();
         $customer = $user->customer;
-        //$customer=Customer::where('user_id',$id)->get();
-        //dd($customer);
         return view('frontend.profile',compact('customer'));
     }
 
@@ -206,6 +204,8 @@ class FrontendController extends Controller
 
 
         $user->assignRole('deliver');
+
+        Auth::login($user);
 
         // Auth::login($user);
 		return redirect()->route('main');
@@ -364,7 +364,21 @@ class FrontendController extends Controller
 
     public function deliverhistory($value='')
     {   
-        $order_confirm = Order::where('status',1)->get();     
+        $order_confirm = Order::all();     
         return view('frontend.deliver_order_history',compact('order_confirm'));
+    }
+
+    public function done($id)
+    {   
+        Order::where('id', $id)
+                  ->update(['status' => 3]); 
+        $order_confirm = Order::all();     
+        return view('frontend.deliver_order_history',compact('order_confirm'));
+    }
+
+    public function orderway($id)
+    {   
+        $order = Order::find($id);     
+        return view('frontend.deliver_order_way',compact('order'));
     }
 }

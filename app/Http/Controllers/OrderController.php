@@ -15,9 +15,9 @@ class OrderController extends Controller
      */
     public function index()
     {
-        $orders = Order::all();
+        
         $order_pending = Order::where('status',0)->get();
-        $order_confirm = Order::where('status',1)->get();
+        $order_confirm = Order::all();
         return view('backend.order.index',compact('order_pending','order_confirm'));
     }
 
@@ -86,7 +86,8 @@ class OrderController extends Controller
      */
     public function destroy(Order $order)
     {
-        //
+        $order->delete();
+        return redirect()->route('order.index');
     }
 
     public function getdeliver(Request $request)
