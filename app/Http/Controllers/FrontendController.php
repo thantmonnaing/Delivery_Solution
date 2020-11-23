@@ -199,8 +199,8 @@ class FrontendController extends Controller
         $deliver->status=0;
         $deliver->save();
 
-        $deliver=Deliver::find($deliver_id);
-        $deliver->townships()->attach($township_id);
+        // $deliver=Deliver::find($deliver_id);
+        // $deliver->townships()->attach($township_id);
 
 
         $user->assignRole('deliver');
