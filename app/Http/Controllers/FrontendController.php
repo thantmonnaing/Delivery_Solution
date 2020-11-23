@@ -358,13 +358,19 @@ class FrontendController extends Controller
 
     public function customerhistory($value='')
     {        
-        $order_confirm = Order::all();
+        $user = Auth::user();
+        $customer = $user->customer;
+        $customer_id = $customer->id;
+        $order_confirm = Order::where('customer_id',$customer_id)->get();
         return view('frontend.customer_order_history',compact('order_confirm'));
     }
 
     public function deliverhistory($value='')
     {   
-        $order_confirm = Order::all();     
+        $user = Auth::user();
+        $customer = $user->customer;
+        $customer_id = $customer->id;
+        $order_confirm = Order::where('customer_id',$customer_id)->get();    
         return view('frontend.deliver_order_history',compact('order_confirm'));
     }
 
