@@ -13,6 +13,7 @@
                                 <th>Confirm date</th>
                                 <th>Customer Name</th>
                                 <th>Deliver Name</th>
+                                <th>Remark</th>
                                 <th>Total</th>
                                 <th>Action</th>
                             </tr>
@@ -22,17 +23,17 @@
                             $i=1;
                             @endphp
                             @foreach($order_confirm as $row)
-                            @if($row->status != 0)
+                            @foreach($row->delivers as $del)
+                            @if($row->status != 0 && $del->pivot->deliver_id == Auth::user()->deliver->id)
                             <tr>
                                 <td>{{$i++}}</td>
                                 <td>{{$row->order_no}}</td>
-                                @foreach($row->delivers as $del)
+                                
                                     <td>{{$del->pivot->date}}</td>
                                     <td>{{$row->customer->user->name}}</td>
-                                    <td>
-                                        {{$del->user->name}}
-                                    </td>    
-                                @endforeach                                      
+                                    <td>{{$del->user->name}}</td>
+                                    <td>{{$row->notes}}</td>    
+                                                                      
                                 @php 
                                 $total = 0;
                                 @endphp
@@ -50,6 +51,7 @@
                                 @endif
                             </tr>
                             @endif
+                            @endforeach
                             @endforeach
                       </tbody>
                   </table>
