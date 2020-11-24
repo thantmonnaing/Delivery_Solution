@@ -76,7 +76,6 @@ Route::get('/', 'FrontendController@index')->name('main');
 
 Route::get('frontendlogin', 'FrontendController@login')->name('frontend.login');
 
-
 Route::get('frontendlogout', 'FrontendController@logout')->name('frontend.logout');
 
 Route::get('customerregister', 'FrontendController@customerregister')->name('frontend.customerregister');

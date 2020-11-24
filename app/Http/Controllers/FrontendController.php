@@ -231,9 +231,15 @@ class FrontendController extends Controller
         $deliver->payment_type= $request->payment;
         $deliver->status=0;
         $deliver->save();
+
         //dd($deliver);
         //$deliver=Deliver::find($deliver_id);
         //$deliver->townships()->attach($township_id);
+
+
+        // $deliver=Deliver::find($deliver_id);
+        // $deliver->townships()->attach($township_id);
+
 
 
         $user->assignRole('deliver');
@@ -416,13 +422,16 @@ class FrontendController extends Controller
 
     public function customerhistory($value='')
     {        
-        $order_confirm = Order::all();
+        $user = Auth::user();
+        $customer = $user->customer;
+        $customer_id = $customer->id;
+        $order_confirm = Order::where('customer_id',$customer_id)->get();
         return view('frontend.customer_order_history',compact('order_confirm'));
     }
 
     public function deliverhistory($value='')
     {   
-        $order_confirm = Order::all();     
+        $order_confirm = Order::all();    
         return view('frontend.deliver_order_history',compact('order_confirm'));
     }
 

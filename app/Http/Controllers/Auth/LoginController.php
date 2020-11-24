@@ -74,16 +74,14 @@ class LoginController extends Controller
         }
            
             //Check user role
-            // switch ($roles[0]) {
-            //     case 'admin':
-            //         return 'customer';
-            //         break;
-
-            //         default:
-            //             return '/';
-            // }
-        
-
+         // $roles =auth()->user()->getRoleNames();
+         //    switch ($roles[0]) {
+         //        case 'admin':
+         //            return 'customer';
+         //            break;
+         //        default:
+         //            return '/';
+         //    }
     }
 
 }
