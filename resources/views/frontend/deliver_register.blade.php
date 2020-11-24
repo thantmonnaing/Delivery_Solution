@@ -133,34 +133,54 @@
 					<div class="form-group">
 						<label class="mr-5 pr-5">Job Day</label>
 						<div class="form-check form-check-inline">  					
-							<input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="monday" name="day"  >
+							<input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="monday" name="day1"  >
 							<label class="form-check-label" for="inlineCheckbox1">Monday</label>
 						</div>
 						<div class="form-check form-check-inline"> 					
-							<input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="tuesday" name="day" >
+							<input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="tuesday" name="day2" >
 							<label class="form-check-label" for="inlineCheckbox2">Tuesday</label>
 						</div>
 						<div class="form-check form-check-inline">
-							<input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="wednesday" name="day" >
+							<input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="wednesday" name="day3" >
 							<label class="form-check-label" for="inlineCheckbox3">Wednesday</label>
 						</div>
 						<div class="form-check form-check-inline">  					
-							<input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="thursday" name="day" >
+							<input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="thursday" name="day4" >
 							<label class="form-check-label" for="inlineCheckbox1">Thursday</label>
 						</div>
 						<div class="form-check form-check-inline">  					
-							<input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="friday" name="day" >
+							<input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="friday" name="day5" >
 							<label class="form-check-label" for="inlineCheckbox2">Friday</label>
 						</div>
 						<div class="form-check form-check-inline">
-							<input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="saturday" name="day" >
+							<input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="saturday" name="day6" >
 							<label class="form-check-label" for="inlineCheckbox3">Saturday</label>
 						</div>
 						<div class="form-check form-check-inline">
-							<input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="sunday" name="day" >
+							<input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="sunday" name="day7" >
 							<label class="form-check-label" for="inlineCheckbox3">Sunday</label>
 						</div>
 					</div>
+
+					{{-- <div class="form-group">
+						<label class="">Job day</label>
+						<select multiple="multiple" name="day[]" size="7" class="custom-select @error('day') is-invalid @enderror receiver_day" id="day">
+							<option selected hidden value="">Choose day</option>
+							<option value="monday" selected="">Monday</option>
+							<option value="tuesday" selected="">Tuesday</option>
+							<option value="wednesday" selected="">Wednesday</option>
+							<option value="thursday" selected="">Thursday</option>
+							<option value="friday" selected="">Friday</option>
+							<option value="saturday" selected="">Saturday</option>
+							<option value="sunday" selected="">Sunday</option>
+								
+						</select>
+						@error('day')
+						<span class="invalid-feedback" role="alert">
+							<strong>{{ $message }}</strong>
+						</span>
+						@enderror
+					</div> --}}
 
 					<div class="form-group row">
 						<label class=" mr-4 mt-4 ml-3 pr-5" >Job Time</label>
@@ -203,7 +223,7 @@
 
 					{{-- <div class="form-group">
 						<label class="">Location</label>
-						<select multiple="true" name="township[]" size="5" class="custom-select @error('township') is-invalid @enderror receiver_township" id="township_id" name="township">
+						<select multiple="multiple" name="township[]" size="5" class="custom-select @error('township') is-invalid @enderror receiver_township" id="township_id">
 							<option selected hidden value="">Choose Township</option>
 								@foreach($townships as $row)
 								<option value="{{$row->id}}" selected="">{{$row->name}}</option>
