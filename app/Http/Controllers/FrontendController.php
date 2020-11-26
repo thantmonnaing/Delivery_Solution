@@ -124,6 +124,8 @@ class FrontendController extends Controller
         //dd($user->email);
         $user->save();
         //dd($user);
+        $customer=Customer::find($request->user_id);
+        //dd($customer);
         $customer->user_id = $request->user_id;
         //dd($customer->user_id);
         $customer->profile = $path;
@@ -139,7 +141,9 @@ class FrontendController extends Controller
 
 	public function deliverstore(Request $request)
 	{
-        // dd($request);
+        //dd($request);
+
+        
         if($request->payment == 'kbz'){
             $request->payment = 'kbz';
 
@@ -160,7 +164,7 @@ class FrontendController extends Controller
             'gender' =>'required',
             'phone' => 'required|regex:/^([0-9\s\-\+\(\)]*)$/|min:10',
             'address' => 'required',
-            'time' => 'required',
+            //'time' => 'required',
             //'job' => 'required',
             // 'job_day' => 'required',
             // 'transport_type' => 'required',
@@ -192,15 +196,50 @@ class FrontendController extends Controller
         $deliver->phone = $request->phone;
         $deliver->address= $request->address;
         $deliver->job_type= $request->job;
-        $deliver->job_day= $request->day;
+
+        if ($request->day1=='monday') {
+            $deliver->job_day= $request->day1;
+        }
+
+        if ($request->day2=='tuesday') {
+            $deliver->job_day= $request->day2;
+        }
+        
+        if ( $request->day3=='wednesday') {
+            $deliver->job_day= $request->day3;
+        }
+      
+        if ($request->day4=='thursday') {
+            $deliver->job_day= $request->day4;
+        } 
+
+        if ($request->day5=='friday') {
+            $deliver->job_day= $request->day5;
+        }
+
+        if ($request->day6=='saturday') {
+            $deliver->job_day= $request->day6;
+        }
+
+        if ($request->day7=='sunday') {
+            $deliver->job_day= $request->day7;
+         } 
+        
+        //$deliver->job_day= $request->day;
         $deliver->job_time= $request->time;
         $deliver->transport_type = $request->transport;
         $deliver->payment_type= $request->payment;
         $deliver->status=0;
         $deliver->save();
 
+        //dd($deliver);
+        //$deliver=Deliver::find($deliver_id);
+        //$deliver->townships()->attach($township_id);
+
+
         // $deliver=Deliver::find($deliver_id);
         // $deliver->townships()->attach($township_id);
+
 
 
         $user->assignRole('deliver');
@@ -260,21 +299,46 @@ class FrontendController extends Controller
         //dd($user);
         
         
-        $deliver->user_id = $request->user_id;
+        $deliver->user_id =$request->user_id;
         //dd($deliver->user_id);
         $deliver->profile = $path;
         $deliver->phone = $request->phone;
         $deliver->address = $request->address;
         $deliver->dob = $request->form;
         $deliver->gender = $request->gender;
-        $deliver->phone = $request->phone;
-        $deliver->address= $request->address;
         $deliver->job_type= $request->job;
-        $deliver->job_day= $request->day;
+         if ($request->day1=='monday') {
+            $deliver->job_day= $request->day1;
+        }
+
+        if ($request->day2=='tuesday') {
+            $deliver->job_day= $request->day2;
+        }
+        
+        if ( $request->day3=='wednesday') {
+            $deliver->job_day= $request->day3;
+        }
+      
+        if ($request->day4=='thursday') {
+            $deliver->job_day= $request->day4;
+        } 
+
+        if ($request->day5=='friday') {
+            $deliver->job_day= $request->day5;
+        }
+
+        if ($request->day6=='saturday') {
+            $deliver->job_day= $request->day6;
+        }
+
+        if ($request->day7=='sunday') {
+            $deliver->job_day= $request->day7;
+         } 
+        //$deliver->job_day= $request->day;
         $deliver->job_time= $request->time;
         $deliver->transport_type = $request->transport;
         $deliver->payment_type= $request->payment;
-        //$deliver->status = $request->status;
+        $deliver->status = $request->status;
         
         $deliver->save();
         //dd($deliver);
