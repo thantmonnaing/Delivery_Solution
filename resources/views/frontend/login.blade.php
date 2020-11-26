@@ -7,9 +7,6 @@
 				<div class="card">
 					<div class="card-header">{{ __('Login') }}</div>
 					<div class="card-body">
-						@if (session('message'))
-        					<div class="alert alert-danger">{{ session('message') }}</div>
-    					@endif
     					@if (Session::has('message'))
    							<div class="alert alert-danger">{{ Session::get('message') }}</div>
 						@endif

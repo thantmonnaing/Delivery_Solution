@@ -371,12 +371,14 @@ class FrontendController extends Controller
         return view('frontend.deliver_order_history',compact('order_confirm'));
     }
 
-    public function done($id)
+    public function done(Request $request)
     {   
+        $id = $request->id;
         Order::where('id', $id)
                   ->update(['status' => 3]); 
-        $order_confirm = Order::all();     
-        return view('frontend.deliver_order_history',compact('order_confirm'));
+        
+        return response()
+            ->json(['msg' => 'You Order Done!']);
     }
 
     public function orderway($id)

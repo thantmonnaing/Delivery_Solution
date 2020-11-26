@@ -36,10 +36,10 @@
           @if(Auth::check()){{ Auth::user()->name }} @endif
         </h5>          
         </li>
-        <li>
-          {{-- <i class="fa fa-sign-out fa-lg"></i> --}}
+        {{-- <li>
+          <i class="fa fa-sign-out fa-lg"></i>
           <a class="app-nav__item" href="{{route('admin.logout')}}"><h5> Logout</h5></a>
-        </li>
+        </li> --}}
       </ul>
     </header>
     <!-- Sidebar menu-->
@@ -74,6 +74,12 @@
           <a class="app-menu__item {{Request::is('blacklist*') ? 'active' : ''}}" href="{{route('blacklist')}}">          
             <i class="app-menu__icon fa fa-ban"></i>
             <span class="app-menu__label">Black List</span>
+          </a>
+        </li>
+        <li class="treeview">
+          <a class="app-menu__item {{Request::is('logout*') ? 'active' : ''}}" href="{{route('admin.logout')}}">          
+            <i class="app-menu__icon fa fa-sign-out"></i>
+            <span class="app-menu__label">Logout</span>
           </a>
         </li>
       </ul>

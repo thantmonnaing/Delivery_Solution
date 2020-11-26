@@ -112,6 +112,6 @@ Route::get('customerhistory', 'FrontendController@customerhistory')->name('custo
 
 Route::get('deliverhistory', 'FrontendController@deliverhistory')->name('deliverhistory');
 
-Route::get('done/{id}', 'FrontendController@done')->name('order.done');
+Route::post('done', 'FrontendController@done')->name('order.done');
 
 Route::get('orderway/{id}', 'FrontendController@orderway')->name('order.way');
