@@ -28,7 +28,7 @@ class CreateDeliversTable extends Migration
             $table->text('address');
             $table->string('job_type');
             $table->string('job_day');
-            $table->time('job_time',0);
+            $table->string('job_time');
             $table->string('transport_type');
             $table->string('payment_type');
             $table->Integer('status')->default(0);

@@ -7,7 +7,7 @@
           <h1><i class="fa fa-dashboard"></i> Deliver Form</h1>
         </div>
         <ul class="app-breadcrumb breadcrumb">
-          <li class="breadcrumb-item"><a href="{{route('deliver.create')}}">Add Deliver</a></li>
+          <li class="breadcrumb-item"><a href="{{route('deliver.create')}}" class="btn btn-primary">Add Deliver</a></li>
         </ul>
       </div>
       <div class="row ">

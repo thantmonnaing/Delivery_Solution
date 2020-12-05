@@ -30,7 +30,6 @@ class DeliverController extends Controller
     public function create()
     {
         $townships=Township::all();
-        // return view('backend.deliver.create',compact('townships'));
         return view('backend.deliver.create',compact('townships'));
     }
 
@@ -42,25 +41,39 @@ class DeliverController extends Controller
      */
     public function store(Request $request)
     {   
-        //dd($request);
+        
+        // dd($request);
+        
         $request-> validate([
             "name" => "required|min:5",
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:8|confirmed',
             'photo' => 'required|mimes:jpeg,jpg,png',
-            'dob' => 'date_format:Y-M-D|before:today',
+            'dob' => 'before:today|required',
             'gender' =>'required',
             'phone' => 'required|regex:/^([0-9\s\-\+\(\)]*)$/|min:10',
             'address' => 'required',
-            'time' => 'required',
-            // 'job' => 'required',
-            // 'job_day' => 'required',
-            // 'transport_type' => 'required',
-            // 'payment_type' => 'required',
+            'start_time' => 'sometimes|required|nullable',
+            'end_time' => 'sometimes|required|nullable',
+            'township' => 'required',
+            'job' => 'required',
+            'day' => 'required',
+            'transport' => 'required',
+            'payment' => 'required',
             
         ]);
 
          // If include file, upload
+        $townships = implode(',',$request->township);
+        $days = implode(',', $request->day);
+        $payments = implode(',', $request->payment);
+
+        if($request->start_time!=null && $request->end_time !=null){
+            $time = $request->start_time.",".$request->end_time;
+        }else{
+            $time = 'null';
+        }
+
         if($request->file()) {
             $fileName = time().'_'.$request->photo->getClientOriginalName();
 
@@ -80,21 +93,24 @@ class DeliverController extends Controller
         $deliver = new Deliver;
         $deliver->user_id = $user->id;
         $deliver->profile = $path;
-        $deliver->dob = $request->form;
+        $deliver->dob = $request->dob;
         $deliver->gender = $request->gender;
         $deliver->phone = $request->phone;
         $deliver->address= $request->address;
         $deliver->job_type= $request->job;
-        $deliver->job_day= $request->day;
-        $deliver->job_time= $request->time;
+        $deliver->job_day= $days;
+        $deliver->job_time= $time;
         $deliver->transport_type = $request->transport;
-        $deliver->payment_type= $request->payment;
+        $deliver->payment_type= $payments;
         $deliver->status=0;
-        $deliver->save();
+        $deliver->save();        
 
         $user->assignRole('deliver');
 
-        // Auth::login($user);
+        foreach ($request->township as $row) {
+
+            $deliver->townships()->attach($row);          
+        }
 
         return redirect()->route('deliver.index');
          

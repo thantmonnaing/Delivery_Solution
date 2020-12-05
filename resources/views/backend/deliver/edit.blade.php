@@ -4,18 +4,15 @@
 <main class="app-content">
   <div class="app-title">
     <div>
-      <h1><i class="fa fa-dashboard"></i> Blank Page</h1>
-      <p>Start a beautiful journey here</p>
+      <h1><i class="fa fa-dashboard"></i> Deliver Edit Form</h1>
     </div>
     <ul class="app-breadcrumb breadcrumb">
-      <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
-      <li class="breadcrumb-item"><a href="{{route('deliver.index')}}">Blank Page</a></li>
+      <li class="breadcrumb-item"><a href="{{route('deliver.index')}}" class="btn btn-primary">Back</a></li>
     </ul>
   </div>
   <div class="row">
     <div class="col-md-12">
       <div class="tile">
-        <h2>Deliver Edit Form</h2>
         <form method="post" action="{{route('deliver.update',$deliver->id)}}" enctype="multipart/form-data">
           @csrf
           @method('PUT')
@@ -67,7 +64,7 @@
 
           </div>
 
-          <div class="form-group row">
+          {{-- <div class="form-group row">
             <div class="col-lg-6">
               <label for="password" class="col-md-4 col-form-label ">{{ __('Password') }}</label>
 
@@ -83,7 +80,7 @@
               <label for="password-confirm" class="col-md-4 col-form-label ">{{ __('Confirm Password') }}</label>
               <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
             </div>
-          </div>
+          </div> --}}
 
           <div class="form-group">
             <label>Date of Birth:</label>

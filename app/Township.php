@@ -12,7 +12,8 @@ class Township extends Model
 
 
     public function delivers(){
-    	return $this->belongsToMany('App\Deliver');
+    	return $this->belongsToMany('App\Deliver','delivertownships')
+                    ->withTimestamps();
     }	
 	
     public function ways(){
