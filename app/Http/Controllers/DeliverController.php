@@ -137,10 +137,21 @@ class DeliverController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit(Deliver $deliver)
-    {   
-        //dd($deliver);
-        $user=User::all();
-        return view('backend.deliver.edit',compact('deliver','user'));
+    {           
+        $deliver->job_day = explode(',',$deliver->job_day);
+        $deliver->payment_type = explode(',', $deliver->payment_type);
+
+        if($deliver->job_time != 'null'){
+            $time_arr = explode(',', $deliver->job_time);
+            $deliver->start_time = $time_arr[0];
+            $deliver->end_time = $time_arr[1];
+        }else{
+            $deliver->start_time = '';
+            $deliver->end_time = '';
+        }
+        // dd($deliver);
+        $townships=Township::all();
+        return view('backend.deliver.edit',compact('deliver','townships'));
     }
 
     /**
@@ -163,7 +174,7 @@ class DeliverController extends Controller
             'gender' =>'required',
             'phone' => 'required|regex:/^([0-9\s\-\+\(\)]*)$/|min:10',
             'address' => 'required',
-            'time' => 'required',
+            'time' => 'sometimes|required',
             // 'job' => 'required',
             // 'job_day' => 'required',
             // 'transport_type' => 'required',
