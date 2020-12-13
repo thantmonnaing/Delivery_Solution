@@ -177,16 +177,12 @@
               @php
                 $i = 1;
               @endphp
-               
-                @foreach($deliver->townships as $t_row)     
-                @foreach($townships as $row)  
-                {{-- {{ $t_row->pivot->township_id}}{{ $row->id}}         --}}
+              @foreach($townships as $row) 
                   <div class="form-check form-check-inline">  
-                    <input class="form-check-input" type="checkbox" name="township[]" id="township{{$i}}" value="{{$row->id}}" {{ $t_row->pivot->township_id == $row->id  ? 'checked' : ''}}>
+                    <input class="form-check-input" type="checkbox" name="township[]" id="township{{$i}}" value="{{$row->id}}" {{ (is_array($deliver->township) && in_array($row->id, $deliver->township)) ? ' checked' : ''}}>
                     <label class="form-check-label" for="township{{$i}}">{{$row->name}}</label>
                   </div>          
-                  @php $i++; @endphp        
-                @endforeach               
+                  @php $i++; @endphp           
               @endforeach
 
               @error('township')

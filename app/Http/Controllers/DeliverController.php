@@ -151,6 +151,12 @@ class DeliverController extends Controller
         }
         // dd($deliver);
         $townships=Township::all();
+        $result = array();
+        foreach ($deliver->townships as $town) {
+            array_push($result, $town->id);
+        }
+        $deliver->township = $result;
+        // dd($deliver->township);
         return view('backend.deliver.edit',compact('deliver','townships'));
     }
 
