@@ -169,23 +169,23 @@ class DeliverController extends Controller
      */
     public function update(Request $request, Deliver $deliver)
     {
-        //dd($request);
+        // dd($request);
         //validation
         $request-> validate([
             "name" => "required|min:5",
-            'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:8|confirmed',
-            'photo' => 'required|mimes:jpeg,jpg,png',
-            'dob' => 'date_format:Y-M-D|before:today',
-            'gender' =>'required',
-            'phone' => 'required|regex:/^([0-9\s\-\+\(\)]*)$/|min:10',
-            'address' => 'required',
-            'time' => 'sometimes|required',
+            'email' => 'required|string|email|max:255',
+            'photo' => 'sometimes|required|mimes:jpeg,jpg,png',
+            // 'dob' => 'date_format:Y-M-D|before:today',
+            // 'gender' =>'required',
+            // 'phone' => 'required|regex:/^([0-9\s\-\+\(\)]*)$/|min:10',
+            // 'address' => 'required',
+            // 'start_time' => 'sometimes|required|nullable',
+            // 'end_time' => 'sometimes|required|nullable',
+            // 'township' => 'required',
             // 'job' => 'required',
-            // 'job_day' => 'required',
-            // 'transport_type' => 'required',
-            // 'payment_type' => 'required',
-            
+            // 'day' => 'required',
+            // 'transport' => 'required',
+            // 'payment' => 'required',            
         ]);
         // If include file, upload
         if($request->file()) {
@@ -198,32 +198,56 @@ class DeliverController extends Controller
             $path = $request->oldphoto;
         }
 
+        $townships = implode(',',$request->township);
+        $days = implode(',', $request->day);
+        $payments = implode(',', $request->payment);
+
+        if($request->start_time!=null && $request->end_time !=null){
+            $time = $request->start_time.",".$request->end_time;
+        }else{
+            $time = 'null';
+        }
+
 
         //data store
-        $user = new User;
+        $user = User::find($request->user_id);
         $user->name = $request->name;
         $user->email = $request->email;
-        $user->password = Hash::make($request->password);
         $user->save();
 
-        $deliver = new Deliver;
-        $deliver->user_id = $user->id;
+        // dd($request);
+
+        $deliver->user_id = $request->user_id;
         $deliver->profile = $path;
-        $deliver->dob = $request->form;
+        $deliver->dob = $request->dob;
         $deliver->gender = $request->gender;
         $deliver->phone = $request->phone;
         $deliver->address= $request->address;
         $deliver->job_type= $request->job;
-        $deliver->job_day= $request->day;
-        $deliver->job_time= $request->time;
+        $deliver->job_day= $days;
+        $deliver->job_time= $time;
         $deliver->transport_type = $request->transport;
-        $deliver->payment_type= $request->payment;
-        
-        $deliver->save();
+        $deliver->payment_type= $payments;
+        $deliver->status=0;
+        $deliver->save();  
 
-        $user->assignRole('deliver');
+        // dd($deliver);
 
-        Auth::login($user);
+        // $deliver->townships()->detach($deliver->id);
+
+        foreach ($request->township as $row) {
+
+            // dd($row);
+
+            $deliver->townships()->attach($row);
+
+            // $deliver->townships()->syncWithoutDetaching($row);   
+        }
+
+        // dd($deliver->townships());
+
+        // dd($arr);
+        // $deliver->townships()->updateExistingPivot($deliver->id,$arr);
 
         return redirect()->route('deliver.index');
 

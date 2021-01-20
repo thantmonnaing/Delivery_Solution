@@ -17,7 +17,7 @@ class OrderController extends Controller
     {
         
         $order_pending = Order::where('status',0)->get();
-        $order_confirm = Order::all();
+        $order_confirm = Order::where('status',1)->get();
         return view('backend.order.index',compact('order_pending','order_confirm'));
     }
 

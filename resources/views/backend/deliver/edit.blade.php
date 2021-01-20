@@ -16,6 +16,7 @@
         <form method="post" action="{{route('deliver.update',$deliver->id)}}" enctype="multipart/form-data">
           @csrf
           @method('PUT')
+          <input type="hidden" name="user_id" value="{{$deliver->user_id}}">
           <div class="form-group">
             <label>Profile: </label>
 
@@ -66,17 +67,17 @@
 
           <div class="form-group">
             <label>Date of Birth:</label>
-            <input type="date" name="form" class="form-control" id="fromDate" value="{{$deliver->dob}}">
+            <input type="date" name="dob" class="form-control" id="dob" value="{{$deliver->dob}}">
           </div>
 
           <div class="form-group">
             <label class="mr-5">Gender:</label>
             <div class="form-check form-check-inline">
-              <input class="form-check-input" type="radio" name="gender" id="inlineRadio1" value="{{$deliver->gender}}" {{ $deliver->gender == "male" ? 'checked' : '' }}>
+              <input class="form-check-input" type="radio" name="gender" id="inlineRadio1" value="male" {{ $deliver->gender == "male" ? 'checked' : '' }}>
               <label class="form-check-label" for="inlineRadio1">Male</label>
             </div>
             <div class="form-check form-check-inline">
-              <input class="form-check-input" type="radio" name="gender" id="inlineRadio2" value="{{$deliver->gender}}" {{ $deliver->gender == "female" ? 'checked' : '' }}>
+              <input class="form-check-input" type="radio" name="gender" id="inlineRadio2" value="female" {{ $deliver->gender == "female" ? 'checked' : '' }}>
               <label class="form-check-label" for="inlineRadio2">Female</label>
             </div>               
           </div>
